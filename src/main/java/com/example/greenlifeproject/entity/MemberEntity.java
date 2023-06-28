@@ -1,0 +1,46 @@
+package com.example.greenlifeproject.entity;
+
+import com.example.greenlifeproject.constant.Role;
+import lombok.Data;
+import lombok.ToString;
+
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "MEMBER")
+@Data
+@ToString
+public class MemberEntity{
+
+    @Id
+    @Column(name = "MEMBER_ID")
+    @GeneratedValue
+    private Long id;
+
+    @Column(length = 20)
+    private String name;
+
+    @Column(length = 50,unique = true)
+    private String email;
+    //가입 중복 방지를 위한 Unique 속성의 email 생성
+
+    @Column(length = 100)
+    private String password;
+
+    @Column(length = 50)
+    private String address;
+    //쇼핑몰 배송지 주소를 받기 위한 주소 필드
+
+    @Column(length = 20)
+    private String phoneNumber;
+    //쇼핑몰 배송자 전화번호를 받기 위한 전화번호
+
+    @Column(length = 20)
+    private String birthDate;
+    //생년 월일
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+}
