@@ -1,17 +1,21 @@
 package com.example.greenlifeproject.entity;
 
 import com.example.greenlifeproject.constant.Role;
+import com.example.greenlifeproject.entity.chatEntitys.ChatEntity;
+import com.example.greenlifeproject.entity.shopEntitys.OrderEntity;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 @Table(name = "MEMBER")
 @Data
 @ToString
-public class MemberEntity{
+public class MemberEntity extends BaseEntity{
 
     @Id
     @Column(name = "MEMBER_ID")
@@ -43,4 +47,9 @@ public class MemberEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<ChatEntity> chatEntityList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<OrderEntity> orders = new ArrayList<>();
 }
