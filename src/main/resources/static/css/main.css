@@ -1,0 +1,233 @@
+* {
+    padding: 0; margin: 0;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    font-family: 'Hahmlet', serif;
+    color: black;
+}
+
+body {
+    font-size: 1rem;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+html{font-size: 18px;}
+
+header{
+    width: 100%; height: 12vh;
+    background: #e6e6e6;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+    padding: .5rem 5.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 99;
+}
+
+#logo {
+    cursor: pointer;
+}
+
+/*navi section*/
+header nav > ul > li{
+    position: relative;
+    float: left;
+}
+
+header nav > ul > li > a{
+    font-size: 1.1rem;
+    padding:1.1rem;
+    color: #1c6726;
+    display: block;
+}
+header nav > ul > li > a::after{
+    content: '';
+    position: absolute;
+    left: 1.8rem;
+    bottom: 0;
+    width: 80%;
+    height: 2px;
+    background: darkgreen;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+header nav > ul > li > a:hover::after{
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+/*dropdown Section*/
+header nav > ul > li > ol{
+    list-style: none;
+}
+header nav > ul > li > ol > li > a{
+    text-align: center;
+    padding:0.5rem;
+    display: block;
+    color: darkgreen;
+}
+header nav > ul > li > ol > li > a:hover{
+    background: transparent;
+    color: black;
+    border: 2px solid #1c6726;
+    border-radius: 6px;
+}
+.testSubmenu, .boardSubmenu{
+    display: none;
+}
+
+.boardSubmenu{
+    position: absolute;
+}
+.testSubmenu{
+    position: absolute;
+}
+
+#gnb > li:hover > a{
+    color: black;
+}
+#gnb > li:hover > .boardSubmenu{
+    display: block;
+}
+#gnb > li:hover > .boardSubmenu > a:hover{
+    color: black;
+}
+#gnb > li:hover > .testSubmenu{
+    display: block;
+}
+#gnb > li:hover > .testSubmenu > a:hover{
+    color: black;
+}
+
+/*login button*/
+nav .btnLogin-popup {
+    width: 5.1rem;
+    height: 3.6rem;
+    background: transparent;
+    border: 2px solid;
+    outline: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    color: #1c6726;
+    text-align: center;
+    cursor: pointer;
+}
+nav .btnLogin-popup:hover {
+    color: #e6e6e6;
+    background: #1c6726;
+}
+
+/*메인 시작*/
+main {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Green Life, 짧은 문구 (메인 상단) */
+.spot {
+    width: 100%; height: 34vh;
+    background-image: url("/img/MainImg.jpg");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.spot #text1 {
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin: 3.2rem 0 1rem -8.3rem;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+
+}
+
+.spot p {
+    width: fit-content;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.spot #text2 {
+    color: white;
+    margin-left: -8.3rem;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+/*취지, 목적 (메인 중앙)*/
+#introduction  {
+    width: 100%; height: 18vh;
+    position: absolute;
+    top: 36vh;
+    overflow: hidden;
+}
+
+#introduction > div{
+    width: 38.9rem; height: 18vh;
+    background-color: #206a47;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+}
+
+#introduction div > h2 {
+    color: white;
+}
+
+/*메인 하단*/
+#container {
+    background-color: #E6E6E6;
+    width: 100%; height: 43vh;
+}
+
+/*게시판, 검사, 쇼핑몰, 채팅 content*/
+#content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#content section {
+    border: 1px solid black;
+    width: 6.6rem; height: 22vh;
+    padding: 1.1rem; margin: 14vh 1.1rem 0 1.1rem;
+}
+
+#content section .menu-title{
+    border-bottom: 1px solid black;
+    margin-bottom: .55rem;
+}
+
+#content section .menu-contents{
+    font-size: .72rem;
+    /*line-height: 0%;*/
+}
+
+footer {
+    width: 100%; height: 11vh;
+    position: relative;
+    background-color: #d5d5d5;
+    bottom: 0;
+    font-size: .7rem;
+}
+
+footer p:first-child {
+    padding: .55rem;
+    float: right;
+}
+
+footer p:last-child {
+    position: absolute;
+    bottom: .55rem; left: .55rem;
+}

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@250&display=swap" rel="stylesheet">
+
+    <title>Green Life</title>
+
+</head>
+<body>
+    <div th:replace="header :: header"></div>
+    <!--헤더바 삽입-->
+<main>
+    <!--        상단-->
+    <section class="spot">
+        <span id="text1"> Green Life </span>
+        <p><span id="text2"> 어서오세요, 환경과 미래를 생각하는 Green Life 홈페이지에 오신 것을 환영합니다. </span></p>
+    </section>
+
+    <!--        중앙-->
+    <section id="introduction">
+        <div id="page1" class="page">
+            <h2>첫 번째 페이지</h2>
+            <p>페이지 설명</p>
+        </div>
+
+        <div id="page2" class="page">
+            <h2>두 번째 페이지</h2>
+            <p>페이지 설명</p>
+        </div>
+    </section>
+
+    <!--        하단-->
+    <section id="container">
+        <div id="content">
+            <section id="label1">
+                <a href="#">
+                    <i class="fi fi-rs-calendar-lines-pen fa-2x"></i>
+                    <p class="menu-title">게시판</p>
+                    <p class="menu-contents">게시판 기반의 건강한 삶 Tip</p>
+                </a>
+            </section>
+
+            <section>
+                <a href="#">
+                    <i class="fi fi-rr-clipboard-list-check fa-2x"></i>
+                    <p class="menu-title">심리 검사</p>
+                    <p class="menu-contents">우울증 <br> 심리 검사 <br> 자가진단</p>
+                </a>
+            </section>
+
+            <section>
+                <a href="#">
+                    <i class="fi fi-rr-shopping-basket fa-2x"></i>
+                    <p class="menu-title">쇼핑몰</p>
+                    <p class="menu-contents">No 플라스틱 <br> 제품 판매 <br>쇼핑몰</p>
+                </a>
+
+            </section>
+
+            <section>
+                <a href="#">
+                    <i class="fi fi-rs-comment-smile fa-2x"></i>
+                    <p class="menu-title">오픈 채팅</p>
+                    <p class="menu-contents">오픈 채팅</p>
+                </a>
+            </section>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>
+        <a href="#">이용약관</a>
+        <a href="#">&nbsp; 개인정보처리방침</a>
+    </p>
+    <p>
+        TEL. 010-xxxx-xxxx <br>
+        e-mail : aa@aaa.com
+    </p>
+</footer>
+
+<script>
+    $(document).ready(function () {
+        // 로고 href
+        $("#logo").on("click", function() {
+            location.href = 'Main.html';
+        });
+
+        // Start 애니메이션
+        function readyani() {
+            $("#text1").hide().fadeIn(300, "linear", function () {
+                $("#text1").css("opacity", "1").animate({"margin-left" : 0}, 1000);
+            });
+
+            $("#text2").hide().fadeIn(1500, "linear", function () {
+                $("#text2").css("opacity", "1").animate({"margin-left" : 0}, 1000);
+                $(".spot p").css("background-color", "rgba(0, 0, 0, 0.5)");
+            });
+        }
+        readyani();
+
+        // 페이지 스크롤 이벤트
+        let page2 = $("#page2").height();
+        let scroll = $("#page1").height();
+        $(window).on('wheel', function (event) {
+            $("#introduction").stop(true);
+            if (event.originalEvent.deltaY > 0) {
+                scroll = page2;
+            } else {
+                scroll = 0;
+            }
+            $("#introduction").animate({scrollTop: scroll}, 400);
+
+        });
+    });
+</script>
+</body>
+</html>

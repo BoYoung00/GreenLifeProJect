@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>회원가입</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@250&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/members/join.css"/>
+
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="logo">
+      <img src="/img/logo_image.png" alt="로고 이미지">
+      <h2>회원가입 양식</h2>
+    </div>
+    <form action="#" method="POST">
+      <div>
+        <label for="email">이메일:</label>
+        <input placeholder="이메일(아이디)" type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="name">이름:</label>
+        <input placeholder="이름" type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="password">비밀번호:</label>
+        <input placeholder="비밀번호" type="password" id="password" name="password" minlength="8" maxlength="15" required>
+      </div>
+
+      <div>
+        <label for="confirm_password">비밀번호 확인:</label>
+        <input placeholder="비밀번호 확인" type="password" id="confirm_password" name="confirm_password" minlength="8" maxlength="15" required>
+        <button type="button" onclick="checkPasswordMatch()">비밀번호 확인</button>
+      </div>
+
+      <div>
+        <label for="address">주소:</label>
+        <input id="member_zipcode" onclick="findAddr()" type="text" placeholder="우편번호 찾기" style="width: 47%;" readonly>
+        <input id="member_address" type="text" placeholder="주소" style="width: 51%;" readonly>
+      </div>
+      <div>
+        <input type="text" id="detail_address" name="detail_address" placeholder="상세주소">
+        <input type="text" style="display:none" id="address" name="address" readonly>
+      </div>
+
+      <div>
+        <label for="phone_number">전화번호: <small>(예: 010-1234-5678)</small></label>
+        <input type="tel" id="phone_number" name="phone_number" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+      </div>
+      <div>
+        <label for="birthday">생년월일:</label>
+        <input type="date" id="birthday" name="birthday" required>
+      </div>
+      <div style="overflow: auto;">
+        <input type="submit" value="가입" id="submit-btn" onclick="submitBtnClickHandler()">
+      </div>
+    </form>
+  </div>
+</body>
+<script>
+  function findAddr(){
+    new daum.Postcode({
+      oncomplete: function(data) {
+        let roadNameAddress = data.roadAddress; // 도로명 주소 변수
+        let landNumberAddress = data.jibunAddress; // 지번 주소 변수
+
+        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+        document.getElementById('member_zipcode').value = data.zonecode;
+
+        if (roadNameAddress !== '') {
+          document.getElementById("member_address").value = roadNameAddress;
+        } else if (landNumberAddress !== '') {
+          document.getElementById("member_address").value = landNumberAddress;
+        }
+      }
+    }).open();
+  }
+
+  function submitBtnClickHandler() {
+    inputAddressValue();
+
+    let oriPassword = document.getElementById("password");
+    let confirmedPassword = document.getElementById("confirm_password");
+
+    if (oriPassword.value !== confirmedPassword.value) {
+      alert("비밀번호를 다시 확인해주세요");
+      return;
+    }
+
+    if (oriPassword.value.length < 8 || oriPassword.value.length > 15) {
+      alert("비밀번호는 8자 이상 15자 이하여야 합니다");
+      return;
+    }
+
+    // 이하 전송 동작 실행
+  }
+
+  function inputAddressValue(){
+    let addressForm = document.getElementById("address");
+    let zipcode = document.getElementById('member_zipcode').value;
+    let address = document.getElementById('member_address').value;
+    let detailAddress = document.getElementById('detail_address').value;
+
+    addressForm.value = zipcode + address + detailAddress;
+  }
+
+  function checkPasswordMatch(){
+    let oriPassword = document.getElementById("password");
+    let confirmedPassword = document.getElementById("confirm_password");
+
+    if (oriPassword.value === confirmedPassword.value)
+      alert("비밀번호가 일치합니다");
+    else
+      alert("비밀번호를 다시 확인해주세요");
+  }
+
+</script>
+</html>
