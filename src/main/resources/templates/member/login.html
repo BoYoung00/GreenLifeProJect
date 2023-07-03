@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login page</title>
+    <link rel="stylesheet" href="/css/members/login.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<section class="login-form">
+
+    <h1>LOGIN</h1>
+    <form action="/login" method="post">
+        <div class="int-area">
+            <input type="text" name="username" id="id" autocomplete="off" required>
+            <label for="id">USER NAME</label>
+        </div>
+        <div class="int-area">
+            <input type="password" name="password" id="pw" autocomplete="off" required>
+            <label for="pw">PASSWORD</label>
+        </div>
+        <div class="btn-area">
+            <button id="btn" type="submit">LOGIN</button>
+        </div>
+        <div class="caption">
+            <a href="/members/">회원가입 하러가기</a>
+        </div>
+    </form>
+</section>
+
+    <script>
+        $(document).ready(function () {
+            let id = $('#id');
+            let pw = $('#pw');
+            let btn = $('#btn');
+
+            $(btn).on('click', function () {
+                if ($(id).val() === "") {
+                    $(id).next('label').addClass('warning');
+                    setTimeout(function () {
+                        $('label').removeClass('warning');
+                    }, 1500);
+                } else if ($(pw).val() === "") {
+                    $(pw).next('label').addClass('warning');
+                    setTimeout(function () {
+                        $('label').removeClass('warning');
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+    <script th:inline="javascript">
+        $(function (){
+            let errorMessage = [[${errorMessage}]];
+            if (errorMessage != null){
+                alert(errorMessage);
+            }
+        });
+    </script>
+</body>
+</html>

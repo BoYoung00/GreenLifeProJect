@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="kr">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,6 +10,7 @@
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/header.css"/>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,8 +21,8 @@
 
 </head>
 <body>
-    <div th:replace="header :: header"></div>
-    <!--헤더바 삽입-->
+    <div th:replace="header.html :: header"></div>
+    <!--헤더바 삽입 (HTML 파일만 불러와짐)-->
 <main>
     <!--        상단-->
     <section class="spot">
@@ -29,7 +30,7 @@
         <p><span id="text2"> 어서오세요, 환경과 미래를 생각하는 Green Life 홈페이지에 오신 것을 환영합니다. </span></p>
     </section>
 
-    <!--        중앙-->
+    <!-- 중앙-->
     <section id="introduction">
         <div id="page1" class="page">
             <h2>첫 번째 페이지</h2>
@@ -100,7 +101,7 @@
         });
 
         // Start 애니메이션
-        function readyani() {
+        function fadeInAndAnimateText() {
             $("#text1").hide().fadeIn(300, "linear", function () {
                 $("#text1").css("opacity", "1").animate({"margin-left" : 0}, 1000);
             });
@@ -110,7 +111,7 @@
                 $(".spot p").css("background-color", "rgba(0, 0, 0, 0.5)");
             });
         }
-        readyani();
+        fadeInAndAnimateText();
 
         // 페이지 스크롤 이벤트
         let page2 = $("#page2").height();
@@ -126,6 +127,8 @@
 
         });
     });
+
+
 </script>
 </body>
 </html>

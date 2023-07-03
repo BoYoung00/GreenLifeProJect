@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@250&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/members/join.css"/>
-
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
@@ -15,9 +15,9 @@
   <div id="container">
     <div id="logo">
       <img src="/img/logo_image.png" alt="로고 이미지">
-      <h2>회원가입 양식</h2>
+      <h2>GreenLife Join</h2>
     </div>
-    <form action="#" method="POST">
+    <form action="/members/joinProc" method="POST">
       <div>
         <label for="email">이메일:</label>
         <input placeholder="이메일(아이디)" type="email" id="email" name="email" required>
@@ -49,14 +49,14 @@
 
       <div>
         <label for="phone_number">전화번호: <small>(예: 010-1234-5678)</small></label>
-        <input type="tel" id="phone_number" name="phone_number" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+        <input type="tel" id="phone_number" name="phoneNumber" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
       </div>
       <div>
         <label for="birthday">생년월일:</label>
-        <input type="date" id="birthday" name="birthday" required>
+        <input type="date" id="birthday" name="birthDate" required>
       </div>
       <div style="overflow: auto;">
-        <input type="submit" value="가입" id="submit-btn" onclick="submitBtnClickHandler()">
+        <input type="submit" value="가입" id="submit-btn" onclick="return submitBtnClickHandler()">
       </div>
     </form>
   </div>
@@ -88,15 +88,14 @@
 
     if (oriPassword.value !== confirmedPassword.value) {
       alert("비밀번호를 다시 확인해주세요");
-      return;
+      return false;
     }
 
     if (oriPassword.value.length < 8 || oriPassword.value.length > 15) {
       alert("비밀번호는 8자 이상 15자 이하여야 합니다");
-      return;
+      return false;
     }
-
-    // 이하 전송 동작 실행
+    return true;
   }
 
   function inputAddressValue(){
@@ -105,7 +104,7 @@
     let address = document.getElementById('member_address').value;
     let detailAddress = document.getElementById('detail_address').value;
 
-    addressForm.value = zipcode + address + detailAddress;
+    addressForm.value = zipcode + "_" +address + "_" + detailAddress;
   }
 
   function checkPasswordMatch(){
@@ -117,6 +116,13 @@
     else
       alert("비밀번호를 다시 확인해주세요");
   }
-
+</script>
+<script th:inline="javascript">
+    $(function (){
+      let errorMessage = [[${errorMessage}]];
+      if (errorMessage != null){
+        alert(errorMessage);
+      }
+    });
 </script>
 </html>

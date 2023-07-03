@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="UTF-8">
@@ -15,8 +15,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@250&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/header.css" />
+
   <title>Green Life</title>
+
+</head>
 
 <body>
   <header>
@@ -39,10 +41,17 @@
         </li>
         <li><a href="#">TALK</a></li>
         <li><a href="#">SHOP</a></li>
-        <button class="btnLogin-popup">LOGIN</button>
+        <th:block sec:authorize="isAuthenticated()">
+          <button class="btnLogout-popup" style="font-size: 1rem">LOGOUT</button>
+        </th:block>
+
+        <th:block sec:authorize="!isAuthenticated()">
+          <button class="btnLogin-popup">LOGIN</button>
+        </th:block>
       </ul>
     </nav>
   </header>
-</body>
 
+
+</body>
 </html>

@@ -1,6 +1,6 @@
 body {
     font-family: 'Hahmlet', Arial, sans-serif;
-    background-color: #f2f2f2;
+    background: #e6e6e6;
     padding: 20px;
 }
 
@@ -22,7 +22,7 @@ body {
 
 form {
     max-width: 400px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.89);
     padding: 20px;
     border-radius: 5px;
     margin: 0 auto;
@@ -30,13 +30,13 @@ form {
 
 h2 {
     margin-top: 20%;
-    color: #333;
+    color: black;
 }
 
 label {
     display: block;
     margin-bottom: 10px;
-    color: #333;
+    color: black;
 }
 
 input[type="text"],
@@ -54,8 +54,8 @@ textarea {
 }
 
 input[type="submit"] {
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: darkgreen;
+    color: #e6e6e6;
     padding: 10px 20px;
     border: none;
     border-radius: 3px;
@@ -67,8 +67,8 @@ input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-button[type="button"]{
-    background-color: #4CAF50;
+button[type="button"] {
+    background-color: darkgreen;
     color: #fff;
     border: none;
     border-radius: 3px;

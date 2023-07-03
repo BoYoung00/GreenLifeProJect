@@ -15,21 +15,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/user/**").authenticated()
-                    .antMatchers("/admin/**").hasRole("ADMIN")
-                    .anyRequest().permitAll()
+                // 경로 권한 설정
+                .antMatchers("/user/**").authenticated()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/css/**", "/img/**").permitAll() // 추가된 부분
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                    .loginPage("/loginForm")
-                    .loginProcessingUrl("/login")
-                    .defaultSuccessUrl("/home")
+                // 로그인 페이지 설정
+                .loginPage("/members/login")
+                // 로그인 처리 URL 설정
+                .loginProcessingUrl("/login")
+                // 로그인 성공 시 이동할 URL 설정
+                .defaultSuccessUrl("/")
+                // 로그인 실패 시 이동할 URL 설정
+                .failureUrl("/members/loginError")
                 .and()
                 .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/loginForm");
+                // 로그아웃 URL 설정
+                .logoutUrl("/logout")
+                // 로그아웃 성공 시 이동할 URL 설정
+                .logoutSuccessUrl("/members/login"); // 추가된 부분
     }
+
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
