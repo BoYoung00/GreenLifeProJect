@@ -42,16 +42,14 @@
         <li><a href="#">TALK</a></li>
         <li><a href="#">SHOP</a></li>
         <th:block sec:authorize="isAuthenticated()">
-          <button class="btnLogout-popup" style="font-size: 1rem">LOGOUT</button>
+          <button class="btnLogout-popup"  onclick="location.href=`http://localhost:8080/logout`" style="font-size: 1rem">LOGOUT</button>
         </th:block>
 
         <th:block sec:authorize="!isAuthenticated()">
-          <button class="btnLogin-popup">LOGIN</button>
+          <button class="btnLogin-popup" onclick="location.href=`http://localhost:8080/members/login`">LOGIN</button>
         </th:block>
       </ul>
     </nav>
   </header>
-
-
 </body>
 </html>

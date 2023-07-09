@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -21,7 +23,13 @@ public class MemberController {
 
     private final MemberService memberService;
     @GetMapping("/join")
-    public String showJoinPage(){
+    public String showJoinPage(Model model, HttpSession httpSession){
+        MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("memberDTO");
+
+        System.out.println(memberDTO);
+
+        if (memberDTO != null)
+            model.addAttribute("memberDTO",memberDTO);
 
         return "/member/join";
     }
@@ -43,14 +51,17 @@ public class MemberController {
 
     @GetMapping("/login")
     public String showLoginPage(){
+
         return "/member/login";
     }
 
     @GetMapping("/loginError")
-    public String showLoginError(Model model){
-
-
+    public String loginForm(@RequestParam(value = "error", required = false) String error,
+                            @RequestParam(value = "exception", required = false) String exception, Model model) {
+        model.addAttribute("error", error);
+        model.addAttribute("exception", exception);
 
         return "/member/login";
     }
+
 }

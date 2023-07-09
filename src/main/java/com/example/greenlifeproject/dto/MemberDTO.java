@@ -2,15 +2,17 @@ package com.example.greenlifeproject.dto;
 
 import com.example.greenlifeproject.constant.Role;
 import com.example.greenlifeproject.entity.MemberEntity;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 @Data
 @ToString
+@NoArgsConstructor
 public class MemberDTO {
 
     private Long id;
@@ -48,4 +50,15 @@ public class MemberDTO {
         return member;
     }
 
+    @Builder
+    public MemberDTO(Long id, String name, String email, String address, String password, String phoneNumber, String birthDate, Role role) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.role = role;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.greenlifeproject.entity;
 
 import com.example.greenlifeproject.constant.Role;
+import com.example.greenlifeproject.dto.MemberDTO;
 import com.example.greenlifeproject.entity.chatEntitys.ChatEntity;
 import com.example.greenlifeproject.entity.shopEntitys.OrderEntity;
 import lombok.Data;
@@ -52,4 +53,11 @@ public class MemberEntity extends BaseEntity{
 
     @OneToMany(mappedBy = "member")
     private List<OrderEntity> orders = new ArrayList<>();
+
+//    //어디 소셜네트웨크에서 접속했는지
+//    private String provider;
+//
+//    //그 소셜 네트워크에서 사용하는 PK
+//    private String providerId;
+
 }

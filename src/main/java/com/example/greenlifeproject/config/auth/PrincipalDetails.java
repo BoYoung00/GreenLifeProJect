@@ -8,24 +8,32 @@ package com.example.greenlifeproject.config.auth;
 //이 클래스도 타입이 정해져있음 UserDetails 타입의 객체여야만함
 
 import com.example.greenlifeproject.entity.MemberEntity;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 //Security Session 안에 => Authentication => UserDetails(PrincipalDetails);
-public class PrincipalDetails implements UserDetails {
+public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private MemberEntity user; //콤 포지션
 
+    private Map<String,Object> attributes;
     public PrincipalDetails(MemberEntity user){
         this.user = user;
+        //일반 유저가 접속하면 실행되는 메소드
     }
 
-    //해당 User 의 권한을 리턴하는 공간
+    public PrincipalDetails(MemberEntity user , Map<String,Object> attributes){
+        this.user = user;
+        this.attributes = attributes;
+        //OAuth 로그인
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -74,5 +82,16 @@ public class PrincipalDetails implements UserDetails {
         //우리 사이트에서 1년동안 회원이 로그인을 한 기록이 없으면 휴먼처리한다고함
         //현재시간 - 로그인 시간
         return true;
+    }
+
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 }

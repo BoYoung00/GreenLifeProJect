@@ -4,6 +4,7 @@ import com.example.greenlifeproject.dto.MemberDTO;
 import com.example.greenlifeproject.entity.MemberEntity;
 import com.example.greenlifeproject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    private final PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
     public MemberEntity saveMember(MemberDTO memberDTO){
         MemberEntity member = MemberDTO.convertToMemberEntity(memberDTO);
 
@@ -49,5 +50,10 @@ public class MemberService {
     public MemberEntity findMemberEntityByEmail(String email){
 
         return  memberRepository.findByEmail(email);
+    }
+
+    public MemberEntity findMemberEntityByName(String username){
+
+        return memberRepository.findByName(username);
     }
 }
