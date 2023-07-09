@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -36,17 +34,20 @@ public class MemberController {
 
     @PostMapping("/joinProc")
     public String handleJoinRequest(@Valid MemberDTO memberDTO,
-                                    BindingResult bindingResult , Model model){
+                                    BindingResult bindingResult , Model model,HttpSession httpSession){
         if (bindingResult.hasErrors()){
             return "member/join";
         }
         try {
             MemberEntity member = memberService.saveMember(memberDTO);
+            httpSession.removeAttribute("memberDTO");
+            //memberDTO라는 이름에 세션 뺏어주기
         }catch (IllegalStateException e){
             model.addAttribute("errorMessage",e.getMessage());
             return "/member/join";
         }
         return "redirect:/";
+
     }
 
     @GetMapping("/login")

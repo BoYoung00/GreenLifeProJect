@@ -23,7 +23,7 @@ public class MemberEntity extends BaseEntity{
     @GeneratedValue
     private Long id;
 
-    @Column(length = 20)
+    @Column(length = 100)
     private String name;
 
     @Column(length = 50,unique = true)

@@ -34,46 +34,67 @@ public class PrincipalOath2UserService extends DefaultOAuth2UserService {
         printOAuth2Information(userRequest);
         // 회원가입을 강제로 진행
         OAuth2User oAuth2User = super.loadUser(userRequest);
-
-        String provider = userRequest.getClientRegistration().getClientId(); // Google 리턴
-        String providerID = oAuth2User.getAttribute("sub");
-        String email = oAuth2User.getAttribute("email");
-        String username = provider + "_" + providerID + "_" + oAuth2User.getAttribute("name");
-        String password = "password";
-        Role role = Role.USER;
+        String username = createMemberName(oAuth2User,userRequest);
 
         MemberEntity member = memberRepository.findByName(username);
 
         if (member == null){
-            MemberDTO memberDTO = MemberDTO.builder()
-                    .name(username)
-                    .password(password)
-                    .email(email)
-                    .role(role)
-                    .build();
-
+            MemberDTO memberDTO = builderMemberDTO(username,oAuth2User);
             member = MemberDTO.convertToMemberEntity(memberDTO);
 
-            httpSession.setAttribute("memberDTO",memberDTO);
+            //세션에 memberDTO 값을 저장
+            storeMemberDTOInSession(memberDTO);
 
-            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-            HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
-
-            try {
-                redirectStrategy.sendRedirect(request, response, "/members/join?memberDTO");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            redirectJoinPage();
         }
 
         return new PrincipalDetails(member, oAuth2User.getAttributes());
     }
 
-    public void printOAuth2Information(OAuth2UserRequest userRequest) {
+
+    private String createMemberName(OAuth2User oAuth2User , OAuth2UserRequest userRequest){
+        String provider = userRequest.getClientRegistration().getClientId(); // Google 리턴
+        String providerID = oAuth2User.getAttribute("sub");
+
+        System.out.println((String) oAuth2User.getAttribute("birthDay"));
+        System.out.println((String) oAuth2User.getAttribute("phoneNumber"));
+
+        return provider + "_" + providerID + "_" + oAuth2User.getAttribute("name");
+
+
+    }
+    private MemberDTO builderMemberDTO(String username,OAuth2User oAuth2User){
+        String email = oAuth2User.getAttribute("email");
+        String password = "password";
+        Role role = Role.USER;
+
+        return MemberDTO.builder()
+                .name(username)
+                .password(password)
+                .email(email)
+                .role(role)
+                .build();
+    }
+
+    private void storeMemberDTOInSession(MemberDTO memberDTO) {
+        httpSession.setAttribute("memberDTO", memberDTO);
+    }
+
+    private void redirectJoinPage(){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+
+        try {
+            redirectStrategy.sendRedirect(request, response, "/members/join");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void printOAuth2Information(OAuth2UserRequest userRequest) {
         System.out.println("USER Request: " + userRequest);
         System.out.println("getAccessToken: " + userRequest.getAccessToken());
         System.out.println("getAdditionalParameters: " + userRequest.getAdditionalParameters());
         System.out.println("getClientRegistration: " + userRequest.getClientRegistration()); // 어떤 Oauth로 로그인 했는지 확인
     }
-
 }
