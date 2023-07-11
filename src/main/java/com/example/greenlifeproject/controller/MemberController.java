@@ -41,7 +41,7 @@ public class MemberController {
         try {
             MemberEntity member = memberService.saveMember(memberDTO);
             httpSession.removeAttribute("memberDTO");
-            //memberDTO라는 이름에 세션 뺏어주기
+            //memberDTO 라는 이름에 세션 뺏어주기
         }catch (IllegalStateException e){
             model.addAttribute("errorMessage",e.getMessage());
             return "/member/join";

@@ -1,6 +1,9 @@
 package com.example.greenlifeproject.config.auth.oath;
 
 import com.example.greenlifeproject.config.auth.PrincipalDetails;
+import com.example.greenlifeproject.config.auth.oath.provider.FacebookUserInfo;
+import com.example.greenlifeproject.config.auth.oath.provider.GoogleUserInfo;
+import com.example.greenlifeproject.config.auth.oath.provider.OAuth2UserInfo;
 import com.example.greenlifeproject.constant.Role;
 import com.example.greenlifeproject.dto.MemberDTO;
 import com.example.greenlifeproject.entity.MemberEntity;
@@ -32,14 +35,17 @@ public class PrincipalOath2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         printOAuth2Information(userRequest);
-        // 회원가입을 강제로 진행
+
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        String username = createMemberName(oAuth2User,userRequest);
+
+        OAuth2UserInfo oAuth2UserInfo = getOAuth2UserInfo(oAuth2User,userRequest);
+
+        String username = createMemberName(oAuth2UserInfo,userRequest);
 
         MemberEntity member = memberRepository.findByName(username);
 
         if (member == null){
-            MemberDTO memberDTO = builderMemberDTO(username,oAuth2User);
+            MemberDTO memberDTO = builderMemberDTO(username,oAuth2UserInfo);
             member = MemberDTO.convertToMemberEntity(memberDTO);
 
             //세션에 memberDTO 값을 저장
@@ -51,20 +57,28 @@ public class PrincipalOath2UserService extends DefaultOAuth2UserService {
         return new PrincipalDetails(member, oAuth2User.getAttributes());
     }
 
+    public OAuth2UserInfo getOAuth2UserInfo(OAuth2User oAuth2User, OAuth2UserRequest userRequest) {
+        OAuth2UserInfo oAuth2UserInfo = null;
 
-    private String createMemberName(OAuth2User oAuth2User , OAuth2UserRequest userRequest){
-        String provider = userRequest.getClientRegistration().getClientId(); // Google 리턴
-        String providerID = oAuth2User.getAttribute("sub");
+        if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
+            oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
+        } else if (userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
+            oAuth2UserInfo = new FacebookUserInfo(oAuth2User.getAttributes());
+        } else {
+            System.out.println("아직 해당 로그인은 지원하지 않습니다.");
+        }
 
-        System.out.println((String) oAuth2User.getAttribute("birthDay"));
-        System.out.println((String) oAuth2User.getAttribute("phoneNumber"));
-
-        return provider + "_" + providerID + "_" + oAuth2User.getAttribute("name");
-
-
+        return oAuth2UserInfo;
     }
-    private MemberDTO builderMemberDTO(String username,OAuth2User oAuth2User){
-        String email = oAuth2User.getAttribute("email");
+
+    private String createMemberName(OAuth2UserInfo oAuth2UserInfo , OAuth2UserRequest userRequest){
+        String provider = oAuth2UserInfo.getProvider();
+        String providerID = oAuth2UserInfo.getProviderId();
+
+        return provider + "_" + providerID + "_" + oAuth2UserInfo.getName();
+    }
+    private MemberDTO builderMemberDTO(String username,OAuth2UserInfo oAuth2UserInfo){
+        String email = oAuth2UserInfo.getEmail();
         String password = "password";
         Role role = Role.USER;
 
