@@ -1,0 +1,186 @@
+* {
+    padding: 0; margin: 0;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    font-family: 'Hahmlet', serif;
+}
+
+body {
+    font-size: 1rem;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+html{font-size: 20px;}
+
+.header { width: 100%;}
+
+main {
+    width: 100%; height: 78vh;
+    background-color: #206a47;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*흰색 배경*/
+.spot {
+    width: 50rem; height: 100%;
+    background-color: white;
+    padding-top: 5rem;
+    text-align: center;
+}
+
+/*첫번째 페이지*/
+/*큰 제목*/
+.start > h1{
+    width: 87%;
+    padding-bottom: 1rem;
+    margin: 0 auto 2rem auto;
+    border-bottom: 1px solid black;
+    font-size: 1.4rem;
+}
+
+/*첫번째 메세지*/
+.start #main_message1 {padding-bottom: .5rem;}
+.start #main_message2 {margin-bottom: 2.5rem;}
+.start #main_message3 {font-size: .7rem; margin-top: .75rem;}
+
+/*검사 시작 버튼*/
+.start_button {
+    background-color: #7d9d7d;
+    border-radius: 30px;
+    padding: .5rem 2.5rem; margin: 5rem;
+    color: white;
+}
+
+.start_button:hover {
+    background-color: #547054;
+
+}
+
+/* 검사 진행도 게이지 바*/
+#progress-bar {
+    width: 70%; height: 1rem;
+    background-color: lightgray;
+    margin: 1rem auto;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+#progress {
+    width: 0; height: 100%;
+    background-color: #7d9d7d;
+    position: absolute;
+    transition: all .5s;
+}
+
+/*검사 질문*/
+.question_box { margin: .5rem; }
+.question_box > p { padding: .5rem 0 1rem 0; }
+
+/*라디오 버튼 none*/
+.choice_box input[id*="radio"] { display: none; }
+
+/*ox*/
+.choice_box {
+    font-size: 5.5rem;
+    margin: 0 2.5rem;
+    border-top: 1px solid black;
+    /*드래그 방지*/
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+
+.choice_box label {
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.choice_box label:hover {
+    color: #206a47;
+}
+
+.inspection {
+    display: none;
+}
+
+/*검사 결과*/
+.result {
+    display: none;
+}
+
+.result > h1{
+    width: 87%;
+    padding-bottom: 1rem;
+    margin: 0 auto;
+    border-bottom: 1px solid black;
+    font-size: 1.3rem;
+}
+
+/*점수*/
+.result #score {
+    font-size: 4.8rem;
+    color: #1c6726;
+}
+
+.result .by_score3 {
+    margin-bottom: 1rem;
+}
+
+/*결과 메세제*/
+.result #result_message {
+    width: 85%;
+    font-size: .9rem;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 0 auto .8rem auto;
+    letter-spacing: 1.5px;
+    background-color: #e6e6e6;
+}
+
+/*다시 검사하기 버튼*/
+.restart_button {
+    color: black; padding: 3px;
+    font-size: .7rem;
+    text-decoration: underline;
+}
+
+.restart_button:hover {
+    color: red;
+}
+
+/*푸터*/
+footer {
+    width: 100%; height: 10vh;
+}
+
+.start {
+    /*display: none;*/
+}
+
+/*푸터*/
+footer {
+    width: 100%; height: 10vh;
+    position: relative;
+    background-color: #d4d4d4;
+    bottom: 0;
+    font-size: .7rem;
+}
+
+footer p:first-child {
+    padding: .55rem;
+    float: right;
+}
+
+footer p:last-child {
+    position: absolute;
+    bottom: .55rem; left: .55rem;
+}
