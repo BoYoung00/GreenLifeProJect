@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@250&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/depression-test.css" />
+    <link rel="stylesheet" href="/css/depression/depression-test.css" />
     <link rel="stylesheet" href="/css/header.css"/>
 </head>
 <body>
@@ -26,7 +26,7 @@
             <img src="../img/sad_icon.png">
             <h1>우울증 자가진단</h1>
 
-            <p id="main_message1"><a>정상수</a>님, 어서오세요.</p>
+            <p id="main_message1"><a th:text="${username}">정상수</a>님, 어서오세요.</p>
             <p id="main_message2">이 검사의 기준은 <b style="color: red">최근 2주 동안</b> 느꼈던
                 <br> 감정에 대한 질문들 입니다.
                 <br> 해당하는 문항에 대해 <b>○</b>를 선택해주세요.
@@ -37,7 +37,7 @@
         </section>
 
         <!--            검사화면-->
-        <form action="/question/{member}" method="get" class="inspection">
+        <form action=# method="get" class="inspection">
             <!-- 게이지 바 (진행도)-->
             <div id="progress-bar">
                 <div id="progress"></div>
@@ -48,7 +48,7 @@
                 <p></p>
             </div>
             <div class="choice_box">
-                <!--                    ox 선택-->
+                <!-- ox 선택-->
                 <label><input type="radio" name="radio" id="radio_o" value="o">O</label>
                 <label><input type="radio" name="radio" id="radio_x" value="x">X</label>
             </div>
@@ -82,43 +82,23 @@
     </p>
 </footer>
 
-<script>
-    $(function () {
+<script th:inline="javascript">
+    $(function() {
         let questionsContainer = $(".question_box > p"); // 질문
-        let quesionNum = $(".question_box > h1"); // 질문 번호
+        let questionNum = $(".question_box > h1"); // 질문 번호
         let index = 0; // questions 인덱스
         let score = 0; // 우울증 점수
         let progress = 0; // 진행도 게이지 퍼센트
-
         // 질문들
-        const questions = [
-            "슬픈 기분이 지속되었나요?",
-            "흥미나 즐거움을 느끼는 데에 어려움이 있었나요?",
-            "자신감이나 자부심에 변화가 있었나요?",
-            "에너지나 활동 수준이 변화되었나요?",
-            "무기력하거나 피곤함을 느꼈나요?",
-            "식욕 변화나 체중 변화가 있었나요?",
-            "잠이 오지 않거나 지나치게 자는 등 수면에 어려움이 있었나요?",
-            "집중력이나 결정력에 어려움이 있었나요?",
-            "생각하거나 움직이는 속도가 느려진 것 같았나요?",
-            "자살이나 죽음에 대한 생각이 있었나요?",
-            "일상적인 활동에 대한 흥미나 기쁨을 느끼기 어려웠나요?",
-            "낙담감이나 절망감을 느꼈나요?",
-            "자신에 대한 부정적인 생각이 자주 들었나요?",
-            "일상적인 활동에 대한 에너지가 없거나 부족했나요?",
-            "자꾸 눈물이 나나요?"
-        ];
+        const questions = [[${questionFileList}]];
+
         // 결과 메세지
-        const resultMessage = [
-            "현재로서 우울증 증상이 나타나지 않습니다. 기쁘게 받아들일 수 있는 좋은 소식이지만, 계속해서 자신의 감정과 상태를 주시하시기 바랍니다. 만약 어려움이나 불안감이 나타난다면 도움을 받을 수 있는 방법을 알아두는 것이 좋습니다.",
-            "조금 어려운 시기를 겪고 계신 것 같습니다. 이런 우울한 감정을 느끼는 것은 일상에서 일어날 수 있는 일입니다. 하지만 우울함이 지속되거나 심화된다면, 가까운 사람들이나 전문가에게 도움을 받아 보세요. 당신은 자신을 돌보고 좋은 치료를 받을 자격이 있습니다.",
-            "심각한 우울증 증상을 경험하고 계신 것 같습니다. 이런 어려움은 혼자서 처리하기에는 너무 많은 부담이 될 수 있습니다. 그러므로 가능한 빠른 시일 내에 전문가와의 상담을 하세요. 전문가는 좋은 치료 방법을 제공해줄 수 있습니다. 당신은 이 어려움을 극복할 수 있는 힘을 가지고 있습니다."
-        ];
+        const resultMessage = [[${resultFileList}]];
 
         // 검사 페이지 : 질문 번호, 질문 내용 넘어가기 함수
         function displayQuestion() {
             if (index < questions.length) {
-                quesionNum.text(index+1);
+                questionNum.text(index + 1);
                 questionsContainer.text(questions[index]);
             } else {
                 showTestResultPage();
@@ -127,34 +107,30 @@
             $(".question_box:not(:animated)").hide().fadeIn(800, "linear");
         }
 
-
         // 검사 페이지 : 점수 계산, 진행도 바
         function handleRadioClick() {
             $("input[type=radio]").on("click", function() {
                 index += 1;
                 // O를 체크하면 점수 추가
-                if($("#radio_o").is(":checked"))
-                    score += 1;
+                if ($("#radio_o").is(":checked")) score += 1;
 
                 // 진행도 바 증가
                 if (progress < 150) {
                     progress += 7.2;
-                    $("#progress").css({"width" : progress + "%"});
+                    $("#progress").css({ width: progress + "%" });
                 }
                 displayQuestion(); // 질문 넘기기
             });
         }
 
-
         // 검사 페이지 : 검사 시작 버튼, 검사 페이지로 넘어가는 함수
         function startInspection() {
-            $(".start_button").click(function () {
-                $(".start").css({"display" : "none"});
-                $(".inspection").css({"display": "block"});
+            $(".start_button").click(function() {
+                $(".start").css({ display: "none" });
+                $(".inspection").css({ display: "block" });
                 displayQuestion(); // 질문 넘기기
             });
         }
-
 
         // 결과 페이지 : 검사 종료 후, 결과 페이지로 넘어가는 함수
         function showTestResultPage() {
@@ -163,49 +139,73 @@
             // 점수 보이기, 해당 점수에 굵게
             if (score <= 5) {
                 $("#result_message").text(resultMessage[0]);
-                $(".by_score1").css({"font-weight" : "800"});
+                $(".by_score1").css({ "font-weight": "800" });
             } else if (score <= 10) {
                 $("#result_message").text(resultMessage[1]);
-                $(".by_score2").css({"font-weight" : "800"});
+                $(".by_score2").css({ "font-weight": "800" });
             } else {
                 $("#result_message").text(resultMessage[2]);
-                $(".by_score3").css({"font-weight" : "800"});
+                $(".by_score3").css({ "font-weight": "800" });
             }
 
             // 화면 나타내기
-            $(".inspection").css({"display" : "none"});
-            $(".result").css({"display": "block"}).hide().fadeIn(2100, "swing");
-
-            // $(".spot").animate({ backgroundColor: "#3b3b3b" }, 5000);
+            $(".inspection").css({ display: "none" });
+            $(".result").css({ display: "block" }).hide().fadeIn(2100, "swing");
         }
-
 
         // 다시 검사 버튼, 메인 페이지로 넘어가는 함수
         function goBackToMainPage() {
-            $(".restart_button").click(function () {
-                $(".result").css({"display" : "none"});
-                $(".start").css({"display": "block"});
+            $(".restart_button").click(function() {
+                $(".result").css({ display: "none" });
+                $(".start").css({ display: "block" });
                 initialize();
             });
         }
 
-
         // 초기화 함수
         function initialize() {
-            index = 0; score = 0; progress = 0;
-            $("#progress").css({"width" : 0 + "%"}); // 게이지바 초기화
+            index = 0;
+            score = 0;
+            progress = 0;
+            $("#progress").css({ width: 0 + "%" }); // 게이지바 초기화
 
-            for (let i = 1; i <= 3; i++) { // 결과 증상 텍스트 굵기
-                $(".by_score" + i).css({"font-weight" : "normal"});
+            for (let i = 1; i <= 3; i++) {
+                // 결과 증상 텍스트 굵기
+                $(".by_score" + i).css({ "font-weight": "normal" });
             }
         }
-
 
         // Main
         handleRadioClick(); // 검사 페이지
         startInspection(); // 결과 페이지
         goBackToMainPage(); // 다시 검사
+
+        function sendTestResultHandler() {
+            let resultMSG = $("#result_message").text();
+            $.ajax({
+                type: "post",
+                url: "/survey/depression",
+                data: {
+                    score: score,
+                    interpretation : resultMSG
+                },
+                success: function(res) {
+                    console.log("요청 성공", res);
+                },
+                error: function(res) {
+                    console.log("요청 실패", res);
+                }
+            });
+        }
+
+        //결과값 15번째에서 클릭을 누르면 처리하는 페이지~!
+        $("#radio_o, #radio_x").on("click", function() {
+            if (index === 15) {
+                sendTestResultHandler();
+            }
+        });
     });
+
 </script>
 </body>
 </html>

@@ -52,8 +52,5 @@ public class MemberService {
         return  memberRepository.findByEmail(email);
     }
 
-    public MemberEntity findMemberEntityByName(String username){
 
-        return memberRepository.findByName(username);
-    }
 }

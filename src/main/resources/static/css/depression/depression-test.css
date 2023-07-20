@@ -25,6 +25,8 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 /*흰색 배경*/

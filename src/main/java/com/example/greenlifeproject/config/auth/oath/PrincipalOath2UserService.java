@@ -3,6 +3,7 @@ package com.example.greenlifeproject.config.auth.oath;
 import com.example.greenlifeproject.config.auth.PrincipalDetails;
 import com.example.greenlifeproject.config.auth.oath.provider.FacebookUserInfo;
 import com.example.greenlifeproject.config.auth.oath.provider.GoogleUserInfo;
+import com.example.greenlifeproject.config.auth.oath.provider.NaverUserInfo;
 import com.example.greenlifeproject.config.auth.oath.provider.OAuth2UserInfo;
 import com.example.greenlifeproject.constant.Role;
 import com.example.greenlifeproject.dto.MemberDTO;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -64,6 +66,8 @@ public class PrincipalOath2UserService extends DefaultOAuth2UserService {
             oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
         } else if (userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
             oAuth2UserInfo = new FacebookUserInfo(oAuth2User.getAttributes());
+        } else if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
+            oAuth2UserInfo = new NaverUserInfo((Map<String, Object>) oAuth2User.getAttributes().get("response"));
         } else {
             System.out.println("아직 해당 로그인은 지원하지 않습니다.");
         }

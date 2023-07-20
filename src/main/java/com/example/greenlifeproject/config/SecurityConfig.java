@@ -22,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 // 3.사용자 프로필 정보를 가지고 와서
 // 4.그 정보를 토대로 회원가입을 자동으로 진행또는 추가 정보
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     private final PrincipalOath2UserService principalOath2UserService;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -30,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 경로 권한 설정
                 .antMatchers("/user/**").authenticated()
+                .antMatchers("/survey/**").authenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/css/**", "/img/**").permitAll() // 추가된 부분
                 .anyRequest().permitAll()
