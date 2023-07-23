@@ -21,18 +21,23 @@ public class  DepressionTestResultDTO{
 
     private String interpretation;
 
-    public static DepressionTestResultEntity convertToDepressionTestResultEntityEntity(DepressionTestResultDTO depressionTestResultDTO){
+    private String level;
 
-        DepressionTestResultEntity depressionTestResultEntity = new DepressionTestResultEntity();
+    public static DepressionTestResultDTO convertToDepressionTestResultDTO(DepressionTestResultEntity depressionTestResultEntity){
+        DepressionTestResultDTO depressionTestResultDTO = new DepressionTestResultDTO();
 
-        depressionTestResultEntity.setDate(LocalDateTime.now());
+        depressionTestResultDTO.setId(depressionTestResultEntity.getId());
 
-        depressionTestResultEntity.setScore(depressionTestResultDTO.getScore());
+        depressionTestResultDTO.setMember(depressionTestResultEntity.getMember());
 
-        depressionTestResultEntity.setMember(depressionTestResultDTO.getMember());
+        depressionTestResultDTO.setDate(depressionTestResultEntity.getDate());
 
-        depressionTestResultEntity.setInterpretation(depressionTestResultDTO.getInterpretation());
+        depressionTestResultDTO.setScore(depressionTestResultEntity.getScore());
 
-        return depressionTestResultEntity;
+        depressionTestResultDTO.setInterpretation(depressionTestResultEntity.getInterpretation());
+
+        depressionTestResultDTO.setLevel(depressionTestResultEntity.getLevel());
+
+        return depressionTestResultDTO;
     }
 }

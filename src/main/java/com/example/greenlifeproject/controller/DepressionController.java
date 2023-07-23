@@ -2,7 +2,6 @@ package com.example.greenlifeproject.controller;
 
 import com.example.greenlifeproject.config.auth.AuthenticationService;
 import com.example.greenlifeproject.dto.DepressionTestResultDTO;
-import com.example.greenlifeproject.dto.MemberDTO;
 import com.example.greenlifeproject.entity.MemberEntity;
 import com.example.greenlifeproject.service.DepressionService;
 import com.example.greenlifeproject.service.MemberService;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 @Controller
@@ -61,5 +61,18 @@ public class DepressionController {
         depressionService.saveDepressionTestResult(depressionTestResultDTO);
 
         return "depression/depression-test";
+    }
+
+    @GetMapping("/depression-test-results")
+    public String showDepressionResultPage(Model model,Authentication authentication){
+        String email = authenticationService.getCurrentUserEmail(authentication);
+
+        MemberEntity member = memberService.findMemberEntityByEmail(email);
+        Long memberID = member.getId();
+        List<DepressionTestResultDTO> depressionTestResultDTOS = depressionService.getResultsForMemberOrderByDateDesc(memberID);
+
+        model.addAttribute("depressionTestResultDTOS",depressionTestResultDTOS);
+        
+        return "depression/my-depression-history";
     }
 }

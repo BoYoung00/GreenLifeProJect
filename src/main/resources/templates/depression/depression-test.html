@@ -182,12 +182,14 @@
 
         function sendTestResultHandler() {
             let resultMSG = $("#result_message").text();
+            let level = getLevelFromScore(score);
             $.ajax({
                 type: "post",
                 url: "/survey/depression",
                 data: {
                     score: score,
-                    interpretation : resultMSG
+                    interpretation : resultMSG,
+                    level : level
                 },
                 success: function(res) {
                     console.log("요청 성공", res);
@@ -204,6 +206,19 @@
                 sendTestResultHandler();
             }
         });
+
+        function getLevelFromScore(score){
+            let level = " ";
+
+            if (score <= 5)
+                level = "정상적임";
+            else if (score > 5 && score <= 10)
+                level = "우울함";
+            else if (score > 10 && score <= 15)
+                level = "매우 우울함";
+
+            return level;
+        }
     });
 
 </script>

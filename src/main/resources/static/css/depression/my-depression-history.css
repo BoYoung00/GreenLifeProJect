@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styling */
+.header {
+    background-color: #206a47;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Main styling for the My Page section */
+.my-page {
+    padding: 2rem;
+    text-align: center;
+}
+
+.my-page h1 {
+    font-size: 1.5rem;
+}
+
+/* Results container styling */
+.results-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    overflow: hidden;
+}
+
+.result-item {
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    width: 200px;
+}
+
+.result-item p {
+    margin: 0.5rem 0;
+}
+
+.details-link {
+    color: #206a47;
+    text-decoration: underline;
+}
+
+.detail-container {
+    margin-top: 2rem;
+}
+
+.detail-container h2 {
+    font-size: 1.2rem;
+}
+
+.detail-container p {
+    margin: 0.5rem 0;
+}
+
+.go-back-link {
+    color: #206a47;
+    text-decoration: underline;
+    display: block;
+    margin-top: 1rem;
+}
+
+footer {
+    background-color: #d4d4d4;
+    padding: 1rem;
+    text-align: center;
+}
+
+
+.navigation-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.prev-button,
+.next-button {
+    background-color: #206a47;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+}
+
+.prev-button[disabled],
+.next-button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

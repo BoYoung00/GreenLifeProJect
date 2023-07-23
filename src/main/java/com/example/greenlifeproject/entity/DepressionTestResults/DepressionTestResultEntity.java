@@ -1,5 +1,6 @@
 package com.example.greenlifeproject.entity.DepressionTestResults;
 
+import com.example.greenlifeproject.dto.DepressionTestResultDTO;
 import com.example.greenlifeproject.entity.MemberEntity;
 import lombok.Data;
 import lombok.ToString;
@@ -34,4 +35,24 @@ public class DepressionTestResultEntity {
     // 결과값
     @Column(name = "Q_ANS")
     private String interpretation;
+
+    @Column(name = "level")
+    private String level;
+
+    public static DepressionTestResultEntity convertToDepressionTestResultEntity(DepressionTestResultDTO depressionTestResultDTO){
+
+        DepressionTestResultEntity depressionTestResultEntity = new DepressionTestResultEntity();
+
+        depressionTestResultEntity.setDate(LocalDateTime.now());
+
+        depressionTestResultEntity.setScore(depressionTestResultDTO.getScore());
+
+        depressionTestResultEntity.setMember(depressionTestResultDTO.getMember());
+
+        depressionTestResultEntity.setInterpretation(depressionTestResultDTO.getInterpretation());
+
+        depressionTestResultEntity.setLevel(depressionTestResultDTO.getLevel());
+
+        return depressionTestResultEntity;
+    }
 }

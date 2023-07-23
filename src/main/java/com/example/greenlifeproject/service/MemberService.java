@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -52,5 +53,8 @@ public class MemberService {
         return  memberRepository.findByEmail(email);
     }
 
+    public MemberEntity findMemberEntityByID(Long id){
 
+        return memberRepository.findById(id).orElse(null);
+    }
 }
