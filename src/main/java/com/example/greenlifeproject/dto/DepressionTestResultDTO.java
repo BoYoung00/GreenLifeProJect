@@ -2,6 +2,7 @@ package com.example.greenlifeproject.dto;
 
 import com.example.greenlifeproject.entity.DepressionTestResults.DepressionTestResultEntity;
 import com.example.greenlifeproject.entity.MemberEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.ToString;
 
@@ -15,6 +16,7 @@ public class  DepressionTestResultDTO{
 
     private MemberEntity member;
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime date;
 
     private Double score;

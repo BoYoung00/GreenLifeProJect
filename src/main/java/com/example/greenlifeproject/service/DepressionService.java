@@ -8,6 +8,7 @@ import com.example.greenlifeproject.repository.DepressionTestResultRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -42,6 +43,7 @@ public class DepressionService {
         depressionTestResultRepository.save(depressionTestResultEntity);
     }
 
+    @Transactional
     public List<DepressionTestResultDTO> getResultsForMemberOrderByDateDesc(Long memberId){
         List<DepressionTestResultDTO> depressionTestResultDTOS = new ArrayList<>();
         MemberEntity member = memberService.findMemberEntityByID(memberId);

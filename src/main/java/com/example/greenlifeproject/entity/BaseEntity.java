@@ -1,5 +1,6 @@
 package com.example.greenlifeproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,10 +20,12 @@ public class BaseEntity {
 
     @CreationTimestamp
     @Column(name = "created_at")//만든 시간
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createDataTime;
 
     @CreationTimestamp
     @Column(name = "updated_at")//수정 시간
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime updatedTime;
 
 }

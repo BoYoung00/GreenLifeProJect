@@ -21,7 +21,7 @@ public class MemberService {
 
     private final BCryptPasswordEncoder passwordEncoder;
     public MemberEntity saveMember(MemberDTO memberDTO){
-        MemberEntity member = MemberDTO.convertToMemberEntity(memberDTO);
+        MemberEntity member = MemberEntity.convertToMemberEntity(memberDTO);
 
         validateDuplicateMember(member);//이메일 중복 검사
 

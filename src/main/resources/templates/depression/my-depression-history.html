@@ -7,11 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>나의 우울증 검사 결과</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@250&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/depression/my-depression-history.css" />
+    <link rel="stylesheet" href="/css/header.css"/>
 </head>
 <body>
-<div class="header">
-    <!-- 헤더 내용을 여기에 포함 -->
-</div>
+
+<div th:replace="header.html :: header"></div>
 <main>
     <section class="my-page">
         <h1>나의 우울증 검사 결과</h1>
@@ -33,11 +38,18 @@
 
 <script th:inline="javascript">
 
-    const testResults = [
-        { date: '2023-07-20', score: 8, level: '우울함', message: '검사 결과 메시지1' },
-        { date: '2023-07-15', score: 4, level: '정상적임', message: '검사 결과 메시지2' },
-        //데이터베이스 가지고오는거 까지됨 근데 이부분을 JSON 타입으로 가지고올 필요가있음
-    ];
+    const testResults = [[${depressionTestResultDTOS}]];
+
+    // 필요한 정보만 추출하여 사용
+    const extractedData = testResults.map(testData => ({
+        id: testData.id,
+        name: testData.member.name,
+        date: testData.date.substring(0,10),
+        score: testData.score,
+        message: testData.interpretation,
+        level: testData.level
+    }));
+
 
     // 보여줄 결과 개수와 현재 페이지 인덱스
     // 보여줄 결과 개수와 현재 페이지 인덱스
@@ -50,10 +62,10 @@
         resultsContainer.innerHTML = ''; // 기존 목록 초기화
 
         const startIdx = currentPageIndex * resultsPerPage;
-        const endIdx = Math.min(startIdx + resultsPerPage, testResults.length);
+        const endIdx = Math.min(startIdx + resultsPerPage, extractedData.length);
 
         for (let i = startIdx; i < endIdx; i++) {
-            const result = testResults[i];
+            const result = extractedData[i];
             const resultItem = document.createElement('div');
             resultItem.classList.add('result-item');
 
@@ -71,7 +83,7 @@
         const nextButton = document.querySelector('.next-button');
 
         prevButton.disabled = currentPageIndex === 0;
-        nextButton.disabled = endIdx >= testResults.length;
+        nextButton.disabled = endIdx >= extractedData.length;
 
         addDetailsLinkEventListeners(); // 상세 보기 링크에 이벤트 리스너 추가
     }
@@ -79,7 +91,7 @@
     // 검사 결과 상세 정보를 동적으로 페이지에 추가하는 함수
     function showTestResultDetails(index) {
         const detailContainer = document.querySelector('.detail-container');
-        const result = testResults[index];
+        const result = extractedData[index];
 
         detailContainer.innerHTML = `
         <h2>${result.date} 검사 결과 상세 정보</h2>
@@ -126,9 +138,9 @@
     // 다음 버튼 클릭 시 다음 페이지로 이동
     document.querySelector('.next-button').addEventListener('click', function () {
         const startIdx = currentPageIndex * resultsPerPage;
-        const endIdx = Math.min(startIdx + resultsPerPage, testResults.length);
+        const endIdx = Math.min(startIdx + resultsPerPage, extractedData.length);
 
-        if (endIdx < testResults.length) {
+        if (endIdx < extractedData.length) {
             currentPageIndex++;
             showTestResultsList();
         }

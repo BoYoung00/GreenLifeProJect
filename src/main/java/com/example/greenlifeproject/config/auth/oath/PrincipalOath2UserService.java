@@ -48,7 +48,7 @@ public class PrincipalOath2UserService extends DefaultOAuth2UserService {
 
         if (member == null){
             MemberDTO memberDTO = builderMemberDTO(username,oAuth2UserInfo);
-            member = MemberDTO.convertToMemberEntity(memberDTO);
+            member = MemberEntity.convertToMemberEntity(memberDTO);
 
             //세션에 memberDTO 값을 저장
             storeMemberDTOInSession(memberDTO);

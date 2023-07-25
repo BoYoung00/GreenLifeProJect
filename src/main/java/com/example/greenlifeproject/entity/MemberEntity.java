@@ -2,6 +2,7 @@ package com.example.greenlifeproject.entity;
 
 import com.example.greenlifeproject.constant.Role;
 import com.example.greenlifeproject.dto.MemberDTO;
+import com.example.greenlifeproject.entity.DepressionTestResults.DepressionTestResultEntity;
 import com.example.greenlifeproject.entity.chatEntitys.ChatEntity;
 import com.example.greenlifeproject.entity.shopEntitys.OrderEntity;
 import lombok.Data;
@@ -48,16 +49,26 @@ public class MemberEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<ChatEntity> chatEntityList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member")
-    private List<OrderEntity> orders = new ArrayList<>();
-
-//    //어디 소셜네트웨크에서 접속했는지
-//    private String provider;
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<ChatEntity> chatEntityList = new ArrayList<>();
 //
-//    //그 소셜 네트워크에서 사용하는 PK
-//    private String providerId;
+//    @OneToMany(mappedBy = "member")
+//    private List<OrderEntity> orders = new ArrayList<>();
+
+    public static MemberEntity convertToMemberEntity(MemberDTO memberDTO) {
+        MemberEntity member = new MemberEntity();
+
+        member.setId(memberDTO.getId());
+        member.setName(memberDTO.getName());
+        member.setEmail(memberDTO.getEmail());
+        member.setPassword(memberDTO.getPassword());
+        member.setAddress(memberDTO.getAddress());
+        member.setPhoneNumber(memberDTO.getPhoneNumber());
+        member.setBirthDate(memberDTO.getBirthDate());
+        member.setRole(Role.USER);//유저값으로 설정해둠
+
+        return member;
+    }
+
 
 }

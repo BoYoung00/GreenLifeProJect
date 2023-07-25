@@ -1,7 +1,6 @@
 package com.example.greenlifeproject.dto;
 
 import com.example.greenlifeproject.constant.Role;
-import com.example.greenlifeproject.entity.MemberEntity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +8,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 
 @Data
 @ToString
@@ -36,19 +36,6 @@ public class MemberDTO {
     private String birthDate;
     
     private Role role;
-
-    public static MemberEntity convertToMemberEntity(MemberDTO memberDTO) {
-        MemberEntity member = new MemberEntity();
-        member.setId(memberDTO.getId());
-        member.setName(memberDTO.getName());
-        member.setEmail(memberDTO.getEmail());
-        member.setPassword(memberDTO.getPassword());
-        member.setAddress(memberDTO.getAddress());
-        member.setPhoneNumber(memberDTO.getPhoneNumber());
-        member.setBirthDate(memberDTO.getBirthDate());
-        member.setRole(Role.USER);//유저값으로 설정해둠
-        return member;
-    }
 
     @Builder
     public MemberDTO(Long id, String name, String email, String address, String password, String phoneNumber, String birthDate, Role role) {

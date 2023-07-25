@@ -5,6 +5,8 @@ import com.example.greenlifeproject.dto.DepressionTestResultDTO;
 import com.example.greenlifeproject.entity.MemberEntity;
 import com.example.greenlifeproject.service.DepressionService;
 import com.example.greenlifeproject.service.MemberService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -64,7 +66,7 @@ public class DepressionController {
     }
 
     @GetMapping("/depression-test-results")
-    public String showDepressionResultPage(Model model,Authentication authentication){
+    public String showDepressionResultPage(Model model,Authentication authentication) throws JsonProcessingException {
         String email = authenticationService.getCurrentUserEmail(authentication);
 
         MemberEntity member = memberService.findMemberEntityByEmail(email);
@@ -72,7 +74,6 @@ public class DepressionController {
         List<DepressionTestResultDTO> depressionTestResultDTOS = depressionService.getResultsForMemberOrderByDateDesc(memberID);
 
         model.addAttribute("depressionTestResultDTOS",depressionTestResultDTOS);
-        
         return "depression/my-depression-history";
     }
 }

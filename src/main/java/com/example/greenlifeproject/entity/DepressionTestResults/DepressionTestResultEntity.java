@@ -2,6 +2,7 @@ package com.example.greenlifeproject.entity.DepressionTestResults;
 
 import com.example.greenlifeproject.dto.DepressionTestResultDTO;
 import com.example.greenlifeproject.entity.MemberEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.ToString;
 
@@ -26,6 +27,7 @@ public class DepressionTestResultEntity {
 
     // 검사 날짜
     @Column(name = "Q_DATE")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime date;
 
     // 점수
