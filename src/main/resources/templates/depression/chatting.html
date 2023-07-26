@@ -1,0 +1,79 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.slim.js" integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/css/depression/chatting.css" />
+    <link rel="stylesheet" href="/css/header.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@250&display=swap" rel="stylesheet">
+
+    <title>Green Life-채팅</title>
+</head>
+<body>
+    <div th:replace="header.html :: header"></div>
+    <main>
+        <section class="content">
+            <form action="" method="post">
+                <section class="content-chatScreen">
+
+                    <!-- 내 메세지-->
+                    <div class="msgBox" id="userMessage">
+                        <div class="spaceBox-right">
+                            <span class="space"></span>
+                            <span class="message-content"><a name="userContent">메시지 내용</a></span>
+                        </div>
+                        <p class="message-time" id="rightTime"><a name="userTime">00:00</a></p>
+                    </div>
+
+                    <!-- 상대방 메세지-->
+                    <div class="msgBox" id="otherUserMessage">
+                        <div class="spaceBox-left">
+                            <span class="message-content"><a name="otherUserContent">메시지 내용</a></span>
+                            <span class="space"></span>
+                        </div>
+                        <p class="message-time"><a name="otherUserTime">00:00</a></p>
+                    </div>
+
+                </section>
+
+                <section class="content-messageBox">
+                    <input type="text" id="inputMessage" placeholder="메시지를 입력하세요" autocomplete="off">
+                    <input type="submit" id="messageSubmit" value="전송">
+                </section>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <a href="#">이용약관</a>
+            <a href="#">&nbsp; 개인정보처리방침</a>
+        </p>
+        <p>
+            TEL. 010-xxxx-xxxx <br>
+            e-mail : aa@aaa.com
+        </p>
+    </footer>
+
+    <script>
+        $(function() {
+            // input text 항상 포커스 되게
+            function inputMsgTextFocus() {
+                let inputMsgText = $("#inputMessage");
+                inputMsgText.focus();
+            }
+
+            inputMsgTextFocus();
+        });
+    </script>
+</body>
+</html>

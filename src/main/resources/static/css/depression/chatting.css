@@ -1,0 +1,131 @@
+* {
+    padding: 0; margin: 0;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    font-family: 'Hahmlet', serif;
+}
+
+body {
+    font-size: 1rem;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+html{font-size: 20px;}
+
+main {
+    width: 100%; height: 78vh;
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*메시지 박스*/
+.content {
+    border: 1px solid #ababab;
+    border-radius: 5px;
+    width: 30rem; height: 30rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .1);
+    background-color: white;
+    padding: 1.25rem;
+}
+
+/*채팅 화면*/
+.content-chatScreen {
+    width: 100%; height: 25rem;
+    border-radius: 5px;
+    border: 1px solid #ababab;
+    padding: .75rem;
+    margin-bottom: .6rem;
+    overflow: auto;
+}
+
+/*모든 시간, 메세지 묶음*/
+.content-chatScreen .msgBox {
+    width: 100%;
+    padding: .25rem;
+    font-size: .85rem;
+    margin-bottom: .5rem;
+}
+
+.content-chatScreen #userMessage #rightTime {
+    float: right;
+}
+
+/*모든 메세지*/
+.content-chatScreen .message-content {
+    background-color: #7d9d7d;
+    padding: .4rem;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* 오른쪽 메세지 공백용 */
+.content-chatScreen #userMessage .spaceBox-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 왼쪽 메세지 공백용 */
+.content-chatScreen #otherUserMessage .spaceBox-left {
+    display: flex;
+}
+
+/*공백 크기*/
+.space {
+    width: 5rem;
+    padding: 0 3rem;
+}
+
+/*메세지 시간*/
+.message-time {
+    font-size: .6rem;
+    padding: 0 .05rem;
+}
+
+/*메시지 보내기*/
+.content-messageBox {width: 100%;}
+
+/*메세지 input text*/
+.content-messageBox #inputMessage {
+    border: 1px solid #ababab;
+    border-radius: 20px;
+    width: 85%; padding: .25rem .5rem;
+    font-size: .8rem;
+    outline: none;
+}
+
+/*메세지 보내기 버튼*/
+.content-messageBox #messageSubmit {
+    width: 3.75rem; padding: .3rem;
+    float: right; font-size: .8rem;
+    border: none;
+    border-radius: 20px;
+    background-color: #206a47;
+    color: white;
+    cursor: pointer;
+}
+
+/*푸터*/
+footer {
+    width: 100%; height: 10vh;
+    position: relative;
+    background-color: #d4d4d4;
+    bottom: 0;
+    font-size: .7rem;
+}
+
+footer p:first-child {
+    padding: .55rem;
+    float: right;
+}
+
+footer p:last-child {
+    position: absolute;
+    bottom: .55rem; left: .55rem;
+}
