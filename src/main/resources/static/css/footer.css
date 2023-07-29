@@ -1,10 +1,14 @@
 
 footer {
     width: 100%; height: 10vh;
-    position: relative;
-    background-color: #d4d4d4;
+    background-color: #363f33;
     bottom: 0;
     font-size: .7rem;
+    position: absolute;
+    box-shadow: 0 0 5px black;
+}
+footer p, footer p > a {
+    color: #959d96;
 }
 
 footer p:first-child {

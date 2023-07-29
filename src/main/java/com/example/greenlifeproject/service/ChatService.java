@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ChatService {
-    private ChatRepository chatRepository;
+    private final ChatRepository chatRepository;
 
     public void saveChatMessage(ChatDTO chatDTO){
         ChatEntity chatEntity = ChatEntity.convertToChatEntity(chatDTO);

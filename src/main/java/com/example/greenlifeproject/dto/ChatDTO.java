@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @ToString
@@ -19,4 +20,5 @@ public class ChatDTO {
 
     private ChatRoomEntity chatRoom;
 
+    private LocalDateTime chatTime;
 }

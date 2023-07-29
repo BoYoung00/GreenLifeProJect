@@ -24,31 +24,33 @@
     <div th:replace="header.html :: header"></div>
     <main>
         <section class="content">
-            <form action="" method="post">
-                <section class="content-chatScreen">
-
+            <form action="#" method="#">
+                <section class="content-chatScreen" id="chatScreen">
+                    <div id="userWelcomeMsg" style="display: none;">
+                        <p>Hello, <span id="userName"></span></p>
+                    </div>
                     <!-- 내 메세지-->
-                    <div class="msgBox" id="userMessage">
-                        <div class="spaceBox-right">
-                            <span class="space"></span>
-                            <span class="message-content"><a name="userContent">메시지 내용</a></span>
-                        </div>
-                        <p class="message-time" id="rightTime"><a name="userTime">00:00</a></p>
-                    </div>
+<!--                    <div class="msgBox" id="userMessage">-->
+<!--                        <div class="spaceBox-right">-->
+<!--                            <span class="space"></span>-->
+<!--                            <span class="message-content"><a name="userContent">메시지 내용</a></span>-->
+<!--                        </div>-->
+<!--                        <p class="message-time" id="rightTime"><a name="userTime">00:00</a></p>-->
+<!--                    </div>-->
 
-                    <!-- 상대방 메세지-->
-                    <div class="msgBox" id="otherUserMessage">
-                        <div class="spaceBox-left">
-                            <span class="message-content"><a name="otherUserContent">메시지 내용</a></span>
-                            <span class="space"></span>
-                        </div>
-                        <p class="message-time"><a name="otherUserTime">00:00</a></p>
-                    </div>
-
+<!--                    &lt;!&ndash; 상대방 메세지&ndash;&gt;-->
+<!--                    <div class="msgBox" id="otherUserMessage">-->
+<!--                        <div class="spaceBox-left">-->
+<!--                            <span class="message-content"><a name="otherUserContent">메시지 내용</a></span>-->
+<!--                            <span class="space"></span>-->
+<!--                        </div>-->
+<!--                        <p class="message-time"><a name="otherUserTime">00:00</a></p>-->
+<!--                    </div>-->
+                    <!--동적으로 추가-->
                 </section>
 
                 <section class="content-messageBox">
-                    <input type="text" id="inputMessage" placeholder="메시지를 입력하세요" autocomplete="off">
+                    <input type="text" id="inputMessage" placeholder="메시지를 입력하세요" autocomplete="off" onkeydown="handleKeyDown(event)">
                     <input type="button" id="messageSubmit" value="전송" onclick="sendMessage()">
                 </section>
             </form>
@@ -65,7 +67,9 @@
             e-mail : aa@aaa.com
         </p>
     </footer>
-    <script>
+    <script th:inline="javascript">
+        let inUserEmail = [[${userEmail}]];
+        let name = [[${name}]];
         $(function() {
             // input text 항상 포커스 되게
             function inputMsgTextFocus() {
@@ -82,7 +86,7 @@
         function sendMessage() {
             const inputMessage = $("#inputMessage").val();
             const message = {
-                content: inputMessage
+                content: inputMessage //DTO 타입이랑 일치되면서 자동 맵핑
             };
             stompClient.send("/app/chat", {}, JSON.stringify(message));
             $("#inputMessage").val("");
@@ -92,15 +96,72 @@
         stompClient.connect({}, function (frame) {
             console.log("WebSocket 연결이 성공하였습니다.");
 
+            showEntranceMessage(name);
+
             // 서버와 WebSocket 연결에 성공하였으므로, 여기서 subscribe 메서드를 호출합니다.
             stompClient.subscribe("/topic/messages", function (message) {
                 const onMessage = JSON.parse(message.body); // JSON 문자열을 파싱하여 객체로 변환
-                const content = onMessage.content; // 원하는 데이터에 접근
-                alert(content)
+                let content = onMessage.content; // 원하는 데이터에 접근
+                let chatTime = onMessage.chatTime.substr(5,11);
+                let memberEmail = onMessage.member.email;
+
+                const timeIndex = chatTime.indexOf("T"); // "T"를 기준으로 시간 부분 추출
+                const timePart = chatTime.substring(timeIndex + 1, timeIndex + 6); // 시간 부분 추출
+                const time = timePart.substring(0, 5); // 시와 분만 가져오기 (시:분 형식)
+
+                addChatMessage(content,time,memberEmail);
+
                 // 받은 메시지를 처리하고 페이지에 표시하는 등의 로직을 추가합니다.
             });
         });
+        function showEntranceMessage(username){
+            const entranceMsgElement = document.getElementById("userWelcomeMsg");
+            entranceMsgElement.innerText = username + "님이 입장하셨습니다";
+            entranceMsgElement.style.display = "block";
+            setTimeout(function (){
+                entranceMsgElement.style.display = "none";
+            },3000);
+        }
+        // 채팅 메시지를 화면에 추가하는 함수
+        function addChatMessage(content, chatTime,nowMemberEmail) {
+            const chatScreen = document.getElementById("chatScreen");
+            const messageBox = document.createElement("div");
 
+            if (inUserEmail === nowMemberEmail) {
+                messageBox.className = "msgBox";
+                messageBox.innerHTML = `
+                <div class="msgBox" id="userMessage">
+                        <div class="spaceBox-right">
+                            <span class="space"></span>
+                            <span class="message-content"><a name="userContent">${content}</a></span>
+                        </div>
+                        <p class="message-time" id="rightTime">${name}</a></p>
+                        <p class="message-time" id="rightTime"><a name="userTime">${chatTime}</a></p>
+                    </div>
+               `;
+            } else {
+                messageBox.className = "msgBox"; // 상대방 메시지 스타일 지정
+                messageBox.innerHTML = `
+                <div class="msgBox" id="otherUserMessage">
+                    <div class="spaceBox-left">
+                        <span class="message-content"><a name="otherUserContent">${content}</a></span>
+                        <span class="space"></span>
+                    </div>
+                    <p class="message-time" id="rightTime"><a name="userTime">${name}</a></p>
+                    <p class="message-time"><a name="otherUserTime">${chatTime}</a></p>
+                </div>
+        `;
+            }
+            chatScreen.appendChild(messageBox);
+        }
+
+
+        function handleKeyDown(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault(); // 엔터 키의 기본 동작인 폼 제출 방지
+                sendMessage();
+            }
+        }
     </script>
 
 </body>
