@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 경로 권한 설정
                 .antMatchers("/user/**").authenticated()
                 .antMatchers("/survey/**").authenticated()
+                .antMatchers("/chat/**").authenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/css/**", "/img/**").permitAll() // 추가된 부분
                 .anyRequest().permitAll()

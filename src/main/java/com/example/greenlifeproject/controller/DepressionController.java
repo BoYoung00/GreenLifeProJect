@@ -71,6 +71,7 @@ public class DepressionController {
 
         MemberEntity member = memberService.findMemberEntityByEmail(email);
         Long memberID = member.getId();
+
         List<DepressionTestResultDTO> depressionTestResultDTOS = depressionService.getResultsForMemberOrderByDateDesc(memberID);
 
         model.addAttribute("depressionTestResultDTOS",depressionTestResultDTOS);

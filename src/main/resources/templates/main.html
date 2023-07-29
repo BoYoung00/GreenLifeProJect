@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,16 +83,8 @@
     </section>
 </main>
 
-<footer>
-    <p>
-        <a href="#">이용약관</a>
-        <a href="#">&nbsp; 개인정보처리방침</a>
-    </p>
-    <p>
-        TEL. 010-xxxx-xxxx <br>
-        e-mail : aa@aaa.com
-    </p>
-</footer>
+<div th:replace="footer.html :: footer"></div>
+
 
 <script>
     $(document).ready(function () {

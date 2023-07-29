@@ -1,14 +1,19 @@
 package com.example.greenlifeproject.dto;
 
 import com.example.greenlifeproject.constant.Role;
+import com.example.greenlifeproject.entity.DepressionTestResults.DepressionTestResultEntity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @ToString

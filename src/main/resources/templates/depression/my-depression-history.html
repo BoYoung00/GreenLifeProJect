@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="/css/depression/my-depression-history.css" />
     <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
 
@@ -32,9 +33,8 @@
         </div>
     </section>
 </main>
-<footer>
-    <!-- 푸터 내용을 여기에 포함 -->
-</footer>
+<div th:replace="footer.html :: footer"></div>
+
 
 <script th:inline="javascript">
 
