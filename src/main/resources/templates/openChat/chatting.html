@@ -26,9 +26,10 @@
         <section class="content">
             <form action="#" method="#">
                 <section class="content-chatScreen" id="chatScreen">
-                    <div id="userWelcomeMsg" style="display: none;">
-                        <p>Hello, <span id="userName"></span></p>
+                    <div id="userWelcomeMsg" style="display: block;">
+<!--                        <p>Hello, <span id="userName"></span></p>-->
                     </div>
+
                     <!-- 내 메세지-->
 <!--                    <div class="msgBox" id="userMessage">-->
 <!--                        <div class="spaceBox-right">-->
@@ -75,7 +76,6 @@
             function inputMsgTextFocus() {
                 $("#inputMessage").focus();
             }
-
             inputMsgTextFocus();
         });
 
@@ -85,20 +85,22 @@
         // 서버로 채팅 메시지 보내는 함수
         function sendMessage() {
             const inputMessage = $("#inputMessage").val();
-            const message = {
-                content: inputMessage //DTO 타입이랑 일치되면서 자동 맵핑
-            };
-            stompClient.send("/app/chat", {}, JSON.stringify(message));
-            $("#inputMessage").val("");
+            if (inputMessage.trim() !== ""){
+                const message = {
+                    content: inputMessage //DTO 타입이랑 일치되면서 자동 맵핑
+                };
+                stompClient.send("/app/chat", {}, JSON.stringify(message));
+                $("#inputMessage").val("");
+            }
+
+
         }
 
         // WebSocket 연결에 성공하면 실행되는 함수
         stompClient.connect({}, function (frame) {
             console.log("WebSocket 연결이 성공하였습니다.");
 
-            showEntranceMessage(name);
-
-            // 서버와 WebSocket 연결에 성공하였으므로, 여기서 subscribe 메서드를 호출합니다.
+            // 서버와 WebSocket 연결에 성공하였으므로, 여기서 subscribe 메서드를 호출
             stompClient.subscribe("/topic/messages", function (message) {
                 const onMessage = JSON.parse(message.body); // JSON 문자열을 파싱하여 객체로 변환
                 let content = onMessage.content; // 원하는 데이터에 접근
@@ -110,18 +112,26 @@
                 const time = timePart.substring(0, 5); // 시와 분만 가져오기 (시:분 형식)
 
                 addChatMessage(content,time,memberEmail);
-
                 // 받은 메시지를 처리하고 페이지에 표시하는 등의 로직을 추가합니다.
             });
         });
-        function showEntranceMessage(username){
-            const entranceMsgElement = document.getElementById("userWelcomeMsg");
-            entranceMsgElement.innerText = username + "님이 입장하셨습니다";
-            entranceMsgElement.style.display = "block";
-            setTimeout(function (){
-                entranceMsgElement.style.display = "none";
-            },3000);
+        function showEntranceMessage(username) {
+            const entranceMsgElement = document.getElementById("chatScreen");
+
+            const welcomeMsg = document.createElement("div");
+            welcomeMsg.className = "userWelcomeMsg";
+            welcomeMsg.innerHTML = `<p>Hello, <span id="userName">${username}</span></p>`;
+
+            entranceMsgElement.appendChild(welcomeMsg);
+
+            welcomeMsg.style.display = "block";
+
+            setTimeout(function() {
+                entranceMsgElement.removeChild(welcomeMsg);
+            }, 3000);
+
         }
+
         // 채팅 메시지를 화면에 추가하는 함수
         function addChatMessage(content, chatTime,nowMemberEmail) {
             const chatScreen = document.getElementById("chatScreen");

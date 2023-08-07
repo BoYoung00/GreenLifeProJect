@@ -62,4 +62,12 @@ public class ChatController {
 
         return chatDTO;
     }
+
+    @MessageMapping("/welcome") // 이 주소로 들어오는 메시지를 처리
+    @SendTo("/topic/entrance") // 이 주소로 응답을 브로드캐스팅(재 응답)
+    public String openChat(String name) {
+        System.out.println(name);
+
+        return "Hello " + name;
+    }
 }

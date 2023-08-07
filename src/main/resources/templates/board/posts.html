@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hahmlet&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/board/posts.css" >
+    <link rel="stylesheet" href="/css/board/aside.css"/>
+<!--    <link rel="stylesheet" href="/css/header.css">-->
+
+</head>
+<body>
+<!-- header 인용 -->
+<div th:replace="board/asdie.html :: aside"></div>
+<main>
+    <div class="boardWrap">
+        <div class="boardTitle">
+            <strong>게시판 전체 글보기</strong>
+            <p>환경을 생각하는 GreenLife 페이지에서는 다양한 환경 관련 정보와 소식을 공유하고자 합니다. 지속 가능한 미래를 위한 행동과 인식을 공유하는 커뮤니티입니다. <br>
+                환경 문제에 관심을 가져주셔서 감사합니다.</p>
+        </div>
+
+        <div class="boardListWrap">
+            <div class="boardList">
+                <div class="tableHeader">
+                    <div class="num">번호</div>
+                    <div class="title">제목</div>
+                    <div class="writer">글쓴이</div>
+                    <div class="date">날짜</div>
+                    <div class="count">조회수</div>
+                </div>
+                <div th:each="boardDTOList : ${boardDTOList}" >
+                    <div th:text="${boardDTOList.id}" class="num">6</div>
+                    <div th:text="${boardDTOList.title}" class="title">제목이 들어가는 자리</div>
+                    <div th:text="${#strings.substring(boardDTOList.member.name, #strings.length(boardDTOList.member.name) - 3)}" class="writer"></div>
+                    <div th:text="${#strings.substring(boardDTOList.updatedTime,0,10)}"  class="date">2023.7.15</div>
+                    <div th:text="${boardDTOList.boardHits}" class="count">66</div>
+                </div>
+            </div>
+            <div class="boardPage">
+                <a th:if="${boardDTOList.number + 1 > 0}" th:href="@{/board/posts(page=0)}" class="pageMoveBtn"><<</a>
+                <a th:if="${boardDTOList.number + 1 > 0}" th:href="@{/board/posts(page=${boardDTOList.number - 1})}" class="pageMoveBtn"><</a>
+
+                <a th:each="page : ${#numbers.sequence(boardDTOList.number / 5 * 5, (boardDTOList.number / 5 + 1) * 5 - 1)}" th:href="@{/board/posts(page=${page})}" class="num" th:text="${page + 1}"></a>
+
+                <a th:if="${boardDTOList.number + 4 < boardDTOList.totalPages}" th:href="@{/board/posts(page=${boardDTOList.number + 1})}" class="pageMoveBtn">></a>
+                <a th:if="${boardDTOList.number + 4 < boardDTOList.totalPages}" th:href="@{/board/posts(page=${boardDTOList.totalPages - 1})}" class="pageMoveBtn">>></a>
+            </div>
+
+            <div class="btnWrap">
+                <a href="/board/write" class="on">글쓰기</a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

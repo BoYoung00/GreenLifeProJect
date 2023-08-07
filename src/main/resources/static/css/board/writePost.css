@@ -1,0 +1,106 @@
+ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.boardWrap {
+    width: 83%;
+    float: right;
+    margin-top: 70px;
+}
+
+.boardWritingWrap {
+    width: 95%;
+}
+
+/* 제목 입력창 부분 */
+.boardWriting .title {
+    border-top: 0.15rem solid darkgreen;
+    box-sizing: border-box;
+    border-bottom: 0.15rem solid darkgreen;
+    padding: 5px;
+}
+
+.boardWriting .title dd {
+    width: calc(100% - 150px);
+    margin-left: 0;
+    max-width: 80%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.boardWriting .title input[type="text"] {
+    padding: 10px;
+    box-sizing: border-box;
+    width: 40%;
+}
+
+/* 내용 입력창 */
+.boardWriting .cont {
+    border-bottom: 0.15rem solid darkgreen;
+}
+
+.boardWriting .cont > textarea {
+    display: block;
+    width: 100%;
+    height: 350px;
+    padding: 15px;
+    box-sizing: border-box;
+    margin: 10px 0px;
+    border: 0.1rem solid #e6e6e6;
+    resize: vertical;
+}
+
+.boardWriting .cont > textarea:focus {
+    outline: none;
+}
+
+/* 버튼 스타일 */
+.btnWrap {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0;
+}
+
+.btnWrap > button {
+    display: inline-block;
+    min-width: 80px;
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #1c6726;
+    border-radius: 2px;
+    font-size: 1rem;
+}
+
+.btnWrap > a:first-child {
+    margin-left: 0;
+}
+
+.btnWrap > .on {
+    background: darkgreen;
+    color: #e6e6e6;
+}
+
+/* 파일 선택창 스타일 */
+.boardWriting .filebox {
+    box-sizing: border-box;
+    width: calc(100% - 150px);
+    padding: 5px 5px 15px;
+}
+
+.boardWriting .filebox .upload-name {
+    width: 40%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.btnWrap {
+    margin-top: 30px;
+    margin-bottom: 30px; /* 하단 여백 추가 */
+    text-align: center;
+    font-size: 0;
+}

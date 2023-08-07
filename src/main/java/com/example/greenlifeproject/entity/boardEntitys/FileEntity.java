@@ -1,10 +1,10 @@
 package com.example.greenlifeproject.entity.boardEntitys;
 
-import com.example.greenlifeproject.entity.boardEntitys.BoardEntity;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.File;
 
 @Entity
 @Data
@@ -32,4 +32,12 @@ public class FileEntity {
     //FetchType FetchType.LAZY 부모 자식 관계에서 부모랑 자식 관계에서 필요할때만 가져오기
     //JoinColum 은 테이블에 만들어지는 컬럼 이름을 말해줌! 특정 부모 Entity 가져오기
 
+    public static FileEntity toBoardFileEntity(BoardEntity boardEntity, String originalFileName, String storedFileName){
+        FileEntity boardFileEntity=new FileEntity();
+        boardFileEntity.setOriginalFileName(originalFileName);
+        boardFileEntity.setStoredFileName(storedFileName);
+        boardFileEntity.setBoard(boardEntity);
+
+        return boardFileEntity;
+    }
 }
