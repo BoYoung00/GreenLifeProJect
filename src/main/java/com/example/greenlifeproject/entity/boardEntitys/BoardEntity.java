@@ -1,5 +1,6 @@
 package com.example.greenlifeproject.entity.boardEntitys;
 
+import com.example.greenlifeproject.dto.BoardDTO;
 import com.example.greenlifeproject.entity.BaseEntity;
 import com.example.greenlifeproject.entity.MemberEntity;
 import lombok.Data;
@@ -33,10 +34,48 @@ public class BoardEntity extends BaseEntity {
     @Column(nullable = false)
     private int boardAvailable; //게시글 삭제 여부
 
+    private int isAttached; //파일 첨부 여부
+
+    private int boardHits;
     @OneToMany(mappedBy = "board",  cascade = CascadeType.ALL)
     List<Comment> comments = new ArrayList<>();
-
+        
     @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
     private List<FileEntity> boardFileEntityList=new ArrayList<>();
+
+    public static BoardEntity convertToBoardEntity(BoardDTO boardDTO){
+        BoardEntity boardEntity = new BoardEntity();
+
+        boardEntity.setTitle(boardDTO.getTitle());
+        boardEntity.setContent(boardDTO.getContent());
+        boardEntity.setMember(boardDTO.getMember());
+
+        boardEntity.setBoardHits(boardDTO.getBoardHits());
+
+        boardEntity.setBoardAvailable(0);
+        boardEntity.setIsAttached(0);
+
+        boardEntity.setCreateDataTime(boardDTO.getCreateDataTime());
+        boardEntity.setUpdatedTime(boardDTO.getUpdatedTime());
+
+        return boardEntity;
+    }
+    public static BoardEntity convertFileToBoardEntity(BoardDTO boardDTO){
+        BoardEntity boardEntity = new BoardEntity();
+
+        boardEntity.setTitle(boardDTO.getTitle());
+        boardEntity.setContent(boardDTO.getContent());
+        boardEntity.setMember(boardDTO.getMember());
+
+        boardEntity.setBoardHits(boardDTO.getBoardHits());
+
+        boardEntity.setBoardAvailable(0);
+        boardEntity.setIsAttached(1);
+
+        boardEntity.setCreateDataTime(boardDTO.getCreateDataTime());
+        boardEntity.setUpdatedTime(boardDTO.getUpdatedTime());
+
+        return boardEntity;
+    }
 
 }

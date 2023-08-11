@@ -134,3 +134,15 @@ footer p:last-child {
     position: absolute;
     bottom: .55rem; left: .55rem;
 }
+
+#userWelcomeMsg {
+    font-size: 8px;
+    font-weight: bold;
+    color: #007bff;
+}
+.user-info {
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    height: 100%; /* 화면 전체 높이에 맞게 사용자 정보를 가운데 정렬 */
+}

@@ -1,0 +1,125 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul, li{
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+.boardWrap {
+    width: 83%;
+    float: right;
+    margin-top: 53px;
+}
+/*게시판 제목부분*/
+.boardTitle{
+    margin-bottom: 30px;
+}
+.boardTitle > strong{
+    font-size: 2.5rem;
+}
+.boardTitle > p{
+    margin-top: 7px;
+    font-size: 1rem;
+}
+
+/*게시판 목록부분*/
+.boardList{
+    width: 95%;
+    border-top: 0.3rem solid #1c6726;
+}
+.boardList > div {
+    border-bottom: 0.1rem solid #e6e6e6;
+    font-size: 0;
+}
+.boardList > div.tableHeader {
+    border-bottom: 0.2rem solid #e6e6e6;
+}
+.boardList > div:last-child {
+    border-bottom: 0.2rem solid #e6e6e6;
+}
+.boardList > div > div {
+    display: inline-block;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+/*목록 내 영역 지정*/
+.boardList .num{
+    width: 10%;
+}
+.boardList .title{
+    width: 60%;
+    text-align: center;
+}
+.boardList .tableHeader .title {
+    text-align: center;
+}
+.boardList .writer{
+    width: 10%;
+}
+.boardList .date{
+    width: 10%;
+}
+.boardList .count{
+    width: 10%;
+}
+
+/*페이지 이동 버튼*/
+.boardPage {
+    margin-top: 35px;
+    text-align: center;
+    /*font-size: 0;*/
+}
+.boardPage > a {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    box-sizing: border-box;
+    border: 0.1rem solid #e6e6e6;
+    vertical-align: middle;
+    border-left: 0;
+    line-height: 100%;
+}
+.boardPage a.pageMoveBtn {
+    padding-top: 3px;
+    font-size: 1.2rem;
+    letter-spacing: -1px;
+}
+.boardPage a.num {
+    padding-top: 3px;
+    font-size: 1.2rem;
+}
+.boardPage a:hover {
+    background: #1c6726;
+    color: #e6e6e6;
+}
+
+
+/*등록, 수정 버튼부분*/
+.btnWrap {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0;
+}
+.btnWrap > a {
+    display: inline-block;
+    min-width: 80px;
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #1c6726;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.btnWrap > a:first-child {
+    margin-left: 0;
+}
+.btnWrap > a.on {
+    background: darkgreen;
+    color: #e6e6e6;
+}

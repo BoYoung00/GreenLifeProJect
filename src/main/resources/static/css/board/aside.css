@@ -1,0 +1,44 @@
+.sideBarTitle {
+    font-size: 1.3rem;
+    font-weight: bolder;
+    box-sizing: border-box;
+    margin-top: 3%;
+    padding-bottom: 15px;
+    border-bottom: 0.15rem solid #e6e6e6;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    list-style-image: none;
+    width: 15%;
+    padding: 0;
+    margin: 0; /* 위쪽 여백 제거 */
+    overflow: auto;
+    box-sizing: border-box;
+    text-align: center;
+    border-top: 0.15rem solid darkgreen;
+    border-bottom: 0.15rem solid darkgreen;
+    position: fixed; /* 절대 위치로 고정 */
+    top: 22%; /* 위쪽에 붙임 */
+    left: 1%; /* 왼쪽에 붙임 */
+    bottom: 0; /* 아래쪽에 꽉 채움 */
+}
+
+li > a {
+    text-decoration: none;
+    display: block;
+    color: black;
+    padding: 8px 15px 8px 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+li > a:last-child {
+    margin-bottom: 10px;
+}
+
+li > a:hover {
+    color: #1c6726;
+}

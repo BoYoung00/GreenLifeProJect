@@ -16,6 +16,8 @@
 
     <link rel="stylesheet" href="/css/depression/depression-test.css" />
     <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css">
+
 </head>
 <body>
 <div th:replace="header.html :: header"></div>
@@ -70,17 +72,7 @@
         </section>
     </section>
 </main>
-
-<footer>
-    <p>
-        <a href="#">이용약관</a>
-        <a href="#">&nbsp; 개인정보처리방침</a>
-    </p>
-    <p>
-        TEL. 010-xxxx-xxxx <br>
-        e-mail : aa@aaa.com
-    </p>
-</footer>
+<div th:replace="footer.html :: footer"></div>
 
 <script th:inline="javascript">
     $(function() {
