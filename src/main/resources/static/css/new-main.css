@@ -1,0 +1,254 @@
+* {
+    padding: 0; margin: 0;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    font-family: 'Hahmlet', serif;
+}
+
+html{font-size: 18px;}
+
+body {
+    font-size: 1rem;
+    width: 100%; height: 100vh;
+    position: relative;
+
+    background-color: rgb(70, 152, 83);
+}
+
+#container {
+    width: 100%;
+}
+
+/*가운데*/
+.main-box{
+    width: 100%;
+    height: 44vh;
+    position: relative;
+}
+
+.main-box > p{
+    height: 100%;
+    margin: 0 10px;
+
+    border-radius: 20px;
+    background-image: url("../img/new_main_img.jpg");
+    background-size: cover;
+    background-color: #ffffff;
+}
+
+/*소개 세션 박스*/
+#introduction  {
+    width: 60%; height: 18vh;
+    position: absolute;
+    left: 20%;
+    top: 80%;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid rgba(48, 141, 62, 0.89);
+}
+
+#introduction > div{
+    width: 100%; height: 100%;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+}
+
+/*하단바*/
+footer{
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    border-top: 1px solid white;
+    margin-top: 18vh;
+    text-align: center;
+}
+
+.flex-box{
+    width: 20%; height: 90%;
+    border: 1px solid white;
+    padding: 2vh 0;
+    margin-top: 15px;
+    border-radius: 5px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.flex-box h5 {
+    margin-bottom: 1.5vh;
+}
+
+.flex-box:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 865px){
+    footer {
+        height: 15vh;
+    }
+
+    .flex-box{
+        width: 110px; height: 100px;
+    }
+
+    .flex-box p {
+        display: none;
+    }
+}
+
+@media screen and (max-height: 750px){
+    footer{
+        margin-top: 15vh;
+    }
+
+    .flex-box p {
+        display: none;
+    }
+}
+
+/*헤더*/
+* {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+header {
+    position: relative;
+
+    /*position: fixed;*/
+    top: 0; left: 0; width: 100%;
+    height: 7rem;
+    padding: 1rem 5.55rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 99;
+}
+
+/*navi section*/
+header .nav > ul{
+    list-style: none;
+}
+header .nav > ul > li{
+    position: relative;
+    float: left;
+}
+header .nav > ul > li > a{
+    font-size: 1.1rem;
+    padding: 1rem;
+    color: #f3f3f3;
+    display: block;
+}
+header .nav > ul > li > a::after{
+    content: '';
+    position: absolute;
+    left: .5rem;
+    bottom: 0;
+    width: 80%;
+    height: .1rem;
+    background: white;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+header .nav > ul > li > a:hover::after{
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+/*dropdown Section*/
+header .nav > ul > li > ol{
+    list-style: none;
+}
+header .nav > ul > li > ol > li > a{
+    font-size: 1rem;
+    text-align: center;
+    padding: .55rem;
+    display: block;
+    color: white;
+}
+header .nav > ul > li > ol > li > a:hover{
+    background-color: rgba(48, 141, 62, 0.89);
+    color: #e6e6e6;
+}
+.testSubmenu, .boardSubmenu{
+    display: none;
+}
+
+.boardSubmenu{
+    position: absolute;
+}
+.testSubmenu{
+    position: absolute;
+}
+
+#gnb > li:hover > a{
+    color: black;
+}
+#gnb > li:hover > .boardSubmenu{
+    display: block;
+}
+#gnb > li:hover > .boardSubmenu > a:hover{
+    color: black;
+}
+#gnb > li:hover > .testSubmenu{
+    display: block;
+}
+#gnb > li:hover > .testSubmenu > a:hover{
+    color: black;
+}
+
+/*login button*/
+.nav .btnLogin-popup {
+    width: 5.1rem;
+    height: 3.6rem;
+    background: transparent;
+    border: 2px solid;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.nav .btnLogin-popup:hover{
+    color: #e6e6e6;
+    background: #1c6726;
+}
+
+@media screen and (max-width: 865px){
+    .nav .font_size {
+        font-size: .77rem;
+    }
+
+    .nav .btnLogin-popup {
+        width: 3.6rem;
+        height: 2.2rem;
+        font-size: .77rem;
+
+        margin-top: .55rem;
+    }
+
+    header{
+        height: 9.72rem;
+        padding: 1.1rem 1.6rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .logo-container img {
+        height: 4.44rem;
+    }
+}
