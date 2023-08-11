@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Green Life</title>
+
+    <link rel="stylesheet" href="/css/new-main.css" />
+
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@250&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<header>
+    <div class="logo-container">
+        <img src="/static/img/new_logo.jpg" height="120px">
+        <a href="#"></a>
+    </div>
+
+    <nav class="nav">
+        <ul id="gnb">
+            <li><a href="#" class="font_size">BOARD</a>
+                <ol class="boardSubmenu">
+                    <li><a href="#" class="font_size">BOARD</a></li>
+                    <li><a href="#" class="font_size">WRITING</a></li>
+                    <li><a href="#" class="font_size">ELSE</a></li>
+                </ol>
+            </li>
+            <li><a href="#" class="font_size">TEST</a>
+                <ol class="testSubmenu">
+                    <li><a href="#" class="font_size">TEST</a></li>
+                    <li><a href="#" class="font_size">RESULT</a></li>
+                    <li><a href="#" class="font_size">ELSE</a></li>
+                </ol>
+            </li>
+            <li><a href="#" class="font_size">TALK</a></li>
+            <li><a href="#" class="font_size">SHOP</a></li>
+            <button class="btnLogin-popup">LOGIN</button>
+        </ul>
+    </nav>
+</header>
+
+<section id="container">
+    <div class="main-box">
+        <p></p>
+
+        <section id="introduction">
+            <div id="page1" class="page">
+                <h2>첫 번째 페이지</h2>
+                <p>페이지 설명</p>
+            </div>
+
+            <div id="page2" class="page">
+                <h2>두 번째 페이지</h2>
+                <p>페이지 설명</p>
+            </div>
+        </section>
+    </div>
+
+
+    <footer>
+        <div class="flex-box">
+            <i class="fi fi-rs-comment-smile fa-2x"></i>
+            <h5>오픈채팅</h5>
+            <p>채팅 사이트</p>
+        </div>
+        <div class="flex-box">
+            <i class="fi fi-rs-calendar-lines-pen fa-2x"></i>
+            <h5>게시판</h5>
+            <p>게시판 사이트</p>
+        </div>
+        <div class="flex-box">
+            <i class="fi fi-rr-shopping-basket fa-2x"></i>
+            <h5>쇼핑몰</h5>
+            <p>쇼핑몰 사이트</p>
+        </div>
+        <div class="flex-box">
+            <i class="fi fi-rr-clipboard-list-check fa-2x"></i>
+            <h5>우울증 검사</h5>
+            <p>우울증 검사 사이트</p>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            // 페이지 스크롤 이벤트
+            function smoothScrollIntroduction() {
+                let page2 = $("#page2").height();
+                let scroll = $("#page1").height();
+                $(window).on('wheel', function (event) {
+                    $("#introduction").stop(true);
+                    if (event.originalEvent.deltaY > 0) {
+                        scroll = page2;
+                    } else {
+                        scroll = 0;
+                    }
+                    $("#introduction").animate({scrollTop: scroll}, 400);
+                });
+            }
+
+            // 메인
+            smoothScrollIntroduction();
+        });
+    </script>
+</section>
+</body>
+</html>

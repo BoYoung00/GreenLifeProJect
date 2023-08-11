@@ -9,6 +9,6 @@ public class MainController {
     @GetMapping({"/", " "})
     public String mainForm(){
 
-        return "main";
+        return "new-main";
     }
 }

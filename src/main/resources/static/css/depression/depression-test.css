@@ -25,8 +25,6 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1%;
-    margin-bottom: 1%;
 }
 
 /*흰색 배경*/
@@ -171,10 +169,15 @@ footer {
 /*푸터*/
 footer {
     width: 100%; height: 10vh;
-    position: relative;
-    background-color: #d4d4d4;
+    background-color: #363f33;
     bottom: 0;
     font-size: .7rem;
+    position: absolute;
+    box-shadow: 0px 0px 5px black;
+}
+
+footer p, footer p > a {
+    color: #959d96;
 }
 
 footer p:first-child {

@@ -32,7 +32,7 @@ main {
 
 /*Green Life, 짧은 문구 (메인 상단) */
 .spot {
-    width: 100%; height: 60vh;
+    width: 100%; height: 34vh;
     background-image: url("../img/MainImg.jpg");
     background-size: cover;
     display: flex;
@@ -110,4 +110,22 @@ main {
 #content section .menu-contents{
     font-size: .72rem;
     /*line-height: 0%;*/
+}
+
+footer {
+    width: 100%; height: 10vh;
+    position: relative;
+    background-color: #d4d4d4;
+    bottom: 0;
+    font-size: .7rem;
+}
+
+footer p:first-child {
+    padding: .55rem;
+    float: right;
+}
+
+footer p:last-child {
+    position: absolute;
+    bottom: .55rem; left: .55rem;
 }

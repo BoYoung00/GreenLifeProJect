@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/header.css"/>
-    <link rel="stylesheet" href="/css/footer.css"/>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,70 +25,73 @@
 <!--헤더바 삽입 (HTML 파일만 불러와짐)-->
 <main>
     <!--        상단-->
-    <section id="wrap">
-        <!--        상단-->
-        <section class="spot">
-            <span id="text1"> Green Life </span>
-            <p><span id="text2"> 어서오세요, 환경과 미래를 생각하는 Green Life 홈페이지에 오신 것을 환영합니다. </span></p>
-        </section>
+    <section class="spot">
+        <span id="text1"> Green Life </span>
+        <p><span id="text2"> 어서오세요, 환경과 미래를 생각하는 Green Life 홈페이지에 오신 것을 환영합니다. </span></p>
+    </section>
 
-        <!-- 중앙-->
-        <section id="introduction">
-            <div id="page1" class="page">
-                <h2>첫 번째 페이지</h2>
-                <p>페이지 설명</p>
-            </div>
+    <!-- 중앙-->
+    <section id="introduction">
+        <div id="page1" class="page">
+            <h2>첫 번째 페이지</h2>
+            <p>페이지 설명</p>
+        </div>
 
-            <div id="page2" class="page">
-                <h2>두 번째 페이지</h2>
-                <p>페이지 설명</p>
-            </div>
-        </section>
+        <div id="page2" class="page">
+            <h2>두 번째 페이지</h2>
+            <p>페이지 설명</p>
+        </div>
+    </section>
 
-        <!--        하단-->
-        <section id="container">
-            <div id="content">
-                <section id="label1">
-                    <a href="#">
-                        <i class="fi fi-rs-calendar-lines-pen fa-2x"></i>
-                        <p class="menu-title">게시판</p>
-                        <p class="menu-contents">게시판 기반의 건강한 삶 Tip</p>
-                    </a>
-                </section>
+    <!--        하단-->
+    <section id="container">
+        <div id="content">
+            <section id="label1">
+                <a href="#">
+                    <i class="fi fi-rs-calendar-lines-pen fa-2x"></i>
+                    <p class="menu-title">게시판</p>
+                    <p class="menu-contents">게시판 기반의 건강한 삶 Tip</p>
+                </a>
+            </section>
 
-                <section>
-                    <a href="#">
-                        <i class="fi fi-rr-clipboard-list-check fa-2x"></i>
-                        <p class="menu-title">심리 검사</p>
-                        <p class="menu-contents">우울증 <br> 심리 검사 <br> 자가진단</p>
-                    </a>
-                </section>
+            <section>
+                <a href="#">
+                    <i class="fi fi-rr-clipboard-list-check fa-2x"></i>
+                    <p class="menu-title">심리 검사</p>
+                    <p class="menu-contents">우울증 <br> 심리 검사 <br> 자가진단</p>
+                </a>
+            </section>
 
-                <section>
-                    <a href="#">
-                        <i class="fi fi-rr-shopping-basket fa-2x"></i>
-                        <p class="menu-title">쇼핑몰</p>
-                        <p class="menu-contents">No 플라스틱 <br> 제품 판매 <br>쇼핑몰</p>
-                    </a>
+            <section>
+                <a href="#">
+                    <i class="fi fi-rr-shopping-basket fa-2x"></i>
+                    <p class="menu-title">쇼핑몰</p>
+                    <p class="menu-contents">No 플라스틱 <br> 제품 판매 <br>쇼핑몰</p>
+                </a>
 
-                </section>
+            </section>
 
-                <section>
-                    <a href="#">
-                        <i class="fi fi-rs-comment-smile fa-2x"></i>
-                        <p class="menu-title">오픈 채팅</p>
-                        <p class="menu-contents">오픈 채팅</p>
-                    </a>
-                </section>
-            </div>
-        </section>
+            <section>
+                <a href="#">
+                    <i class="fi fi-rs-comment-smile fa-2x"></i>
+                    <p class="menu-title">오픈 채팅</p>
+                    <p class="menu-contents">오픈 채팅</p>
+                </a>
+            </section>
+        </div>
     </section>
 </main>
 
-<div th:replace="footer.html :: footer"></div>
-
-</body>
-
+<footer>
+    <p>
+        <a href="#">이용약관</a>
+        <a href="#">&nbsp; 개인정보처리방침</a>
+    </p>
+    <p>
+        TEL. 010-xxxx-xxxx <br>
+        e-mail : aa@aaa.com
+    </p>
+</footer>
 
 <script>
     $(document).ready(function () {
@@ -109,26 +111,24 @@
                 $(".spot p").css("background-color", "rgba(0, 0, 0, 0.5)");
             });
         }
-        function smoothScrollIntroduction() {
-            let page2 = $("#page2").height();
-            let scroll = $("#page1").height();
-            $(window).on('wheel', function (event) {
-                $("#introduction").stop(true);
-                if (event.originalEvent.deltaY > 0) {
-                    scroll = page2;
-                } else {
-                    scroll = 0;
-                }
-                $("#introduction").animate({scrollTop: scroll}, 400);
-            });
-        }
-
-        smoothScrollIntroduction();
         fadeInAndAnimateText();
 
         // 페이지 스크롤 이벤트
+        let page2 = $("#page2").height();
+        let scroll = $("#page1").height();
+        $(window).on('wheel', function (event) {
+            $("#introduction").stop(true);
+            if (event.originalEvent.deltaY > 0) {
+                scroll = page2;
+            } else {
+                scroll = 0;
+            }
+            $("#introduction").animate({scrollTop: scroll}, 400);
+
+        });
     });
 
 
 </script>
+</body>
 </html>
