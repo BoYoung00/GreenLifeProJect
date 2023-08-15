@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -52,4 +53,17 @@ public class BoardController {
 
         return "board/posts";
     }
+
+    @GetMapping("/detailPost/{id}")
+    public String showDetailPostPage(@PathVariable Long id,Model model){
+        //조회수 증가
+        boardService.updateHits(id);
+        //해당 게시글 찾아서 보여주기
+        BoardDTO boardDTO = boardService.findById(id);
+
+        model.addAttribute("boardDTO",boardDTO);
+        
+        return "board/detail";
+    }
+
 }

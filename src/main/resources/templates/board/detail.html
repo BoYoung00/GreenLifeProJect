@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>상세글 페이지</title>
+    <link rel="stylesheet" href="/css/board/aside.css"/>
+    <link rel="stylesheet" href="/css/board/detail.css"/>
+
+</head>
+
+<body>
+<div th:replace="board/asdie.html :: aside"></div>
+
+<main>
+    <div class="boardWrap">
+        <div class="boardTitle">
+            <p>>>상세 글보기</p>
+        </div>
+        <div class="boardWritingWrap">
+            <div class="boardWriting">
+                <div class="topInput">
+                    <div class="title">
+                        <dl>
+                            <dd th:utext="${boardDTO.title.replace('\n', '<br>')}">친환경을 지키는 5가지 방법.</dd>
+                        </dl>
+                        <div class="subTitle">
+                            <span class="writer">말하는 감자</span>
+                            <!--              <span class="dateTime">2021.05.22 00:21</span>-->
+                            <span class="count"><strong>30</strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cont">
+                    <p th:utext="${boardDTO.content.replace('\n', '<br>')}">친환경을 지키는 5가지 방법.</p>
+                </div>
+                <div class="filebox">
+                    <div class="comment">
+                        <span> → <strong>히히 응애 아기 감자</strong></span>
+                        <span><small>말하는 문어</small></span>
+                    </div>
+
+                    <div class="comment">
+                        <span> → <strong>히히 응애 아기 감자</strong></span>
+                        <span><small>말하는 문어</small></span>
+                    </div>
+
+                    <h4>댓글입력</h4>
+                    <form>
+                        <input class="upload-name"  placeholder="댓글을 입력해주세요">
+                        <a href="#" class="commentBtn">등록</a>
+                    </form>
+                </div>
+            </div>
+
+            <div class="btnWrap">
+                <a href="#" class="delete">삭제</a>
+                <a href="#" class="edit">수정</a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -9,6 +9,7 @@
     <title>Green Life</title>
 
     <link rel="stylesheet" href="/css/new-main.css" />
+    <link rel="stylesheet" href="/css/header.css">
 
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
@@ -23,34 +24,7 @@
 
 </head>
 <body>
-<header>
-    <div class="logo-container">
-        <img src="/static/img/new_logo.jpg" height="120px">
-        <a href="#"></a>
-    </div>
-
-    <nav class="nav">
-        <ul id="gnb">
-            <li><a href="#" class="font_size">BOARD</a>
-                <ol class="boardSubmenu">
-                    <li><a href="#" class="font_size">BOARD</a></li>
-                    <li><a href="#" class="font_size">WRITING</a></li>
-                    <li><a href="#" class="font_size">ELSE</a></li>
-                </ol>
-            </li>
-            <li><a href="#" class="font_size">TEST</a>
-                <ol class="testSubmenu">
-                    <li><a href="#" class="font_size">TEST</a></li>
-                    <li><a href="#" class="font_size">RESULT</a></li>
-                    <li><a href="#" class="font_size">ELSE</a></li>
-                </ol>
-            </li>
-            <li><a href="#" class="font_size">TALK</a></li>
-            <li><a href="#" class="font_size">SHOP</a></li>
-            <button class="btnLogin-popup">LOGIN</button>
-        </ul>
-    </nav>
-</header>
+<div th:replace="header.html :: header"></div>
 
 <section id="container">
     <div class="main-box">

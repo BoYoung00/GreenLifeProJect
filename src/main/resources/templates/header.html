@@ -1,51 +1,28 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header>
+  <div class="logo-container">
+    <img src="/img/new_logo.jpg" height="120px">
+    <a href="#"></a>
+  </div>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@250&display=swap" rel="stylesheet">
-
-  <title>Green Life</title>
-
-</head>
-
-<body>
-  <header>
-    <img id="logo" src="/img/logo_image.png" height="100px">
-    <nav>
-      <ul id="gnb">
-        <li><a href="#">BOARD</a>
-          <ol class="boardSubmenu">
-            <li><a href="#">BOARD</a></li>
-            <li><a href="#">WRITING</a></li>
-            <li><a href="#">ELSE</a></li>
-          </ol>
-        </li>
-        <li><a href="#">TEST</a>
-          <ol class="testSubmenu">
-            <li><a href="http://localhost:8080/survey/depression">TEST</a></li>
-            <li><a href="http://localhost:8080/survey/depression-test-results">RESULT</a></li>
-            <li><a href="#">ELSE</a></li>
-          </ol>
-        </li>
-        <li><a href="http://localhost:8080/chat/room">TALK</a></li>
-        <li><a href="#">SHOP</a></li>
-        <th:block sec:authorize="isAuthenticated()">
-          <button class="btnLogout-popup"  onclick="location.href=`http://localhost:8080/logout`" style="font-size: 1rem">LOGOUT</button>
-        </th:block>
-
-        <th:block sec:authorize="!isAuthenticated()">
-          <button class="btnLogin-popup" onclick="location.href=`http://localhost:8080/members/login`">LOGIN</button>
-        </th:block>
-      </ul>
-    </nav>
-  </header>
-</body>
-</html>
+  <nav class="nav">
+    <ul id="gnb">
+      <li><a href="#" class="font_size">BOARD</a>
+        <ol class="boardSubmenu">
+          <li><a href="#" class="font_size">BOARD</a></li>
+          <li><a href="#" class="font_size">WRITING</a></li>
+          <li><a href="#" class="font_size">ELSE</a></li>
+        </ol>
+      </li>
+      <li><a href="#" class="font_size">TEST</a>
+        <ol class="testSubmenu">
+          <li><a href="#" class="font_size">TEST</a></li>
+          <li><a href="#" class="font_size">RESULT</a></li>
+          <li><a href="#" class="font_size">ELSE</a></li>
+        </ol>
+      </li>
+      <li><a href="#" class="font_size">TALK</a></li>
+      <li><a href="#" class="font_size">SHOP</a></li>
+      <button class="btnLogin-popup">LOGIN</button>
+    </ul>
+  </nav>
+</header>
