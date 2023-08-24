@@ -1,13 +1,16 @@
 package com.example.greenlifeproject.service;
 
+import com.example.greenlifeproject.config.auth.AuthenticationService;
 import com.example.greenlifeproject.dto.MemberDTO;
 import com.example.greenlifeproject.entity.MemberEntity;
 import com.example.greenlifeproject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.PersistenceUnit;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,6 +23,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     private final BCryptPasswordEncoder passwordEncoder;
+
+    private final AuthenticationService authenticationService;
     public MemberEntity saveMember(MemberDTO memberDTO){
         MemberEntity member = MemberEntity.convertToMemberEntity(memberDTO);
 
@@ -58,5 +63,20 @@ public class MemberService {
         return memberRepository.findById(id).orElse(null);
     }
 
+    public String getLoggedInUserName(Authentication authentication){
+        String name = authenticationService.getCurrentUser(authentication);
+
+        if (name.length() > 7){
+            name = name.substring(name.length()-3);
+        }
+
+        return name;
+    }
+
+    public MemberDTO findMemberDTOByEmail(String email){
+        MemberEntity member = memberRepository.findByEmail(email);
+
+        return MemberDTO.convertToMemberDTO(member);
+    }
 
 }

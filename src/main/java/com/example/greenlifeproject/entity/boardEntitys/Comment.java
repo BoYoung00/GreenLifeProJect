@@ -1,6 +1,7 @@
 package com.example.greenlifeproject.entity.boardEntitys;
 
-import com.example.greenlifeproject.entity.boardEntitys.BoardEntity;
+import com.example.greenlifeproject.dto.BoardCommentDTO;
+import com.example.greenlifeproject.entity.MemberEntity;
 import lombok.Data;
 import lombok.ToString;
 
@@ -15,7 +16,7 @@ public class Comment {
     @Id
     @GeneratedValue
     @Column(name = "COMMENT_ID")
-    private Long comment_id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "BOARD_ID")
@@ -24,7 +25,16 @@ public class Comment {
     @Column(name = "CONTENT")
     private String content;
 
-    @Column(name = "AVAILABLE")
-    private String commentAvailable;
-    //댓글 삭제 여부
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private MemberEntity member;
+
+    public static Comment convertToCommentEntity(BoardCommentDTO commentDTO) {
+        Comment comment = new Comment();
+
+        comment.setMember(commentDTO.getWriter());
+        comment.setContent(commentDTO.getContent());
+        comment.setBoard(commentDTO.getBoard());
+        return comment;
+    }
 }

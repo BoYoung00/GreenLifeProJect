@@ -37,9 +37,10 @@ public class BoardEntity extends BaseEntity {
     private int isAttached; //파일 첨부 여부
 
     private int boardHits;
-    @OneToMany(mappedBy = "board",  cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "board",  cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.EAGER)
     List<Comment> comments = new ArrayList<>();
-        
+
     @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
     private List<FileEntity> boardFileEntityList=new ArrayList<>();
 

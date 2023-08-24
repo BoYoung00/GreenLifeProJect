@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").authenticated()
                 .antMatchers("/survey/**").authenticated()
                 .antMatchers("/chat/**").authenticated()
+                .antMatchers("/board/**").authenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/css/**", "/img/**").permitAll() // 추가된 부분
                 .anyRequest().permitAll()

@@ -1,6 +1,8 @@
 package com.example.greenlifeproject.service;
 
 import com.example.greenlifeproject.dto.BoardDTO;
+import com.example.greenlifeproject.dto.MemberDTO;
+import com.example.greenlifeproject.entity.MemberEntity;
 import com.example.greenlifeproject.entity.boardEntitys.BoardEntity;
 import com.example.greenlifeproject.entity.boardEntitys.FileEntity;
 import com.example.greenlifeproject.repository.BoardFileRepository;
@@ -66,12 +68,27 @@ public class BoardService {
         boardRepository.updateHits(id);
     }
 
-    public BoardDTO findById(Long id) {
+    public BoardDTO findBoardDTOById(Long id) {
         Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
         if (optionalBoardEntity.isPresent()){
             BoardEntity boardEntity = optionalBoardEntity.get();
             return BoardDTO.convertToBoardDTO(boardEntity);
         }
         return null;
+    }
+    public BoardEntity findBoardEntityById(Long id){
+        Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
+
+        return optionalBoardEntity.orElse(null);
+    }
+    public int getUserPostCount(MemberEntity member) {
+
+        return boardRepository.countByMember(member);
+    }
+
+    public int findByPostHits(Long id) {
+        BoardEntity boardEntity = boardRepository.findBoardEntityById(id);
+
+        return boardEntity.getBoardHits();
     }
 }

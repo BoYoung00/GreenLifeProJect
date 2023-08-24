@@ -1,3 +1,5 @@
+<html lang="kr" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <header>
   <div class="logo-container">
     <img src="/img/new_logo.jpg" height="120px">
@@ -8,21 +10,28 @@
     <ul id="gnb">
       <li><a href="#" class="font_size">BOARD</a>
         <ol class="boardSubmenu">
-          <li><a href="#" class="font_size">BOARD</a></li>
-          <li><a href="#" class="font_size">WRITING</a></li>
+          <li><a href="http://localhost:8080/board/posts" class="font_size">BOARD</a></li>
+          <li><a href="http://localhost:8080/board/write" class="font_size">WRITING</a></li>
           <li><a href="#" class="font_size">ELSE</a></li>
         </ol>
       </li>
       <li><a href="#" class="font_size">TEST</a>
         <ol class="testSubmenu">
-          <li><a href="#" class="font_size">TEST</a></li>
-          <li><a href="#" class="font_size">RESULT</a></li>
+          <li><a href="http://localhost:8080/survey/depression" class="font_size">TEST</a></li>
+          <li><a href="http://localhost:8080/survey/depression-test-results" class="font_size">RESULT</a></li>
           <li><a href="#" class="font_size">ELSE</a></li>
         </ol>
       </li>
-      <li><a href="#" class="font_size">TALK</a></li>
+      <li><a href="http://localhost:8080/chat/room" class="font_size">TALK</a></li>
       <li><a href="#" class="font_size">SHOP</a></li>
-      <button class="btnLogin-popup">LOGIN</button>
+      <th:block sec:authorize="isAuthenticated()">
+        <button class="btnLogout-popup"  onclick="location.href=`http://localhost:8080/logout`" style="font-size: 1rem">LOGOUT</button>
+      </th:block>
+
+      <th:block sec:authorize="!isAuthenticated()">
+        <button class="btnLogin-popup" onclick="location.href=`http://localhost:8080/members/login`">LOGIN</button>
+      </th:block>
+
     </ul>
   </nav>
 </header>

@@ -2,6 +2,7 @@ package com.example.greenlifeproject.dto;
 
 import com.example.greenlifeproject.constant.Role;
 import com.example.greenlifeproject.entity.DepressionTestResults.DepressionTestResultEntity;
+import com.example.greenlifeproject.entity.MemberEntity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -52,5 +53,19 @@ public class MemberDTO {
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.role = role;
+    }
+
+    public static MemberDTO convertToMemberDTO(MemberEntity memberEntity){
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setId(memberEntity.getId());
+        memberDTO.setName(memberEntity.getName());
+        memberDTO.setEmail(memberEntity.getEmail());
+        memberDTO.setPassword(memberEntity.getPassword());
+        memberDTO.setAddress(memberEntity.getAddress());
+        memberDTO.setBirthDate(memberEntity.getBirthDate());
+        memberDTO.setPhoneNumber(memberEntity.getPhoneNumber());
+        memberDTO.setRole(memberEntity.getRole());
+
+        return memberDTO;
     }
 }

@@ -34,14 +34,9 @@ public class ChatController {
     @GetMapping("/room")
     public String showOpenChatPage(Authentication authentication, Model model){
         String email = authenticationService.getCurrentUserEmail(authentication);
-        String name = authenticationService.getCurrentUser(authentication);
+        String name = memberService.getLoggedInUserName(authentication);
 
-        if (name.length() > 7){
-            name = name.substring(name.length()-3);
-            //이름 추출하기
-        }
-
-        System.out.println(email);
+        System.out.println(name);
 
         model.addAttribute("name",name);
         model.addAttribute("userEmail",email);

@@ -94,7 +94,7 @@ header .nav > ul > li > ol > li > a:hover{
 }
 
 /*login button*/
-.nav .btnLogin-popup {
+.nav .btnLogin-popup ,.btnLogout-popup{
     width: 5.1rem;
     height: 3.6rem;
     background: transparent;
@@ -107,7 +107,7 @@ header .nav > ul > li > ol > li > a:hover{
 
 }
 
-.nav .btnLogin-popup:hover{
+.nav .btnLogin-popup:hover ,.btnLogout-popup:hover{
     color: #e6e6e6;
     background: #1c6726;
 }

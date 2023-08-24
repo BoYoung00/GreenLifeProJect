@@ -31,12 +31,7 @@ public class DepressionController {
 
     @GetMapping("/depression")
     public String showDepressionTestPage(Authentication authentication, Model model){
-        String name = authenticationService.getCurrentUser(authentication);
-
-        if (name.length() > 7){
-            name = name.substring(name.length()-3);
-            //이름 추출하기
-        }
+        String name = memberService.getLoggedInUserName(authentication);
 
         model.addAttribute("username",name);
         //이름 추출하여 화면에 출력

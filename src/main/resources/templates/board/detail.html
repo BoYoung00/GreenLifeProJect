@@ -5,6 +5,7 @@
     <title>상세글 페이지</title>
     <link rel="stylesheet" href="/css/board/aside.css"/>
     <link rel="stylesheet" href="/css/board/detail.css"/>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 
 </head>
 
@@ -14,7 +15,7 @@
 <main>
     <div class="boardWrap">
         <div class="boardTitle">
-            <p>>>상세 글보기</p>
+            <h4>>>상세 글보기</h4>
         </div>
         <div class="boardWritingWrap">
             <div class="boardWriting">
@@ -24,31 +25,29 @@
                             <dd th:utext="${boardDTO.title.replace('\n', '<br>')}">친환경을 지키는 5가지 방법.</dd>
                         </dl>
                         <div class="subTitle">
-                            <span class="writer">말하는 감자</span>
+                            <span th:text = "작성자 +':  ' + ${username}" class="writer">말하는 감자</span>
                             <!--              <span class="dateTime">2021.05.22 00:21</span>-->
-                            <span class="count"><strong>30</strong></span>
+                            <span class="count" th:text = "조회수 + ':  ' + ${userPostHits}">30</span>
                         </div>
                     </div>
                 </div>
                 <div class="cont">
                     <p th:utext="${boardDTO.content.replace('\n', '<br>')}">친환경을 지키는 5가지 방법.</p>
                 </div>
-                <div class="filebox">
+                <div class="filebox" id="commentBox">
                     <div class="comment">
                         <span> → <strong>히히 응애 아기 감자</strong></span>
                         <span><small>말하는 문어</small></span>
                     </div>
 
-                    <div class="comment">
-                        <span> → <strong>히히 응애 아기 감자</strong></span>
-                        <span><small>말하는 문어</small></span>
-                    </div>
+<!--                    <div class="comment">-->
+<!--                        <span> → <strong>히히 응애 아기 감자</strong></span>-->
+<!--                        <span><small>말하는 문어</small></span>-->
+<!--                    </div>-->
 
                     <h4>댓글입력</h4>
-                    <form>
-                        <input class="upload-name"  placeholder="댓글을 입력해주세요">
-                        <a href="#" class="commentBtn">등록</a>
-                    </form>
+                    <input class="upload-name" id="commentMSG" placeholder="댓글을 입력해주세요">
+                    <button id="submitComment" class="commentBtn">등록</button>
                 </div>
             </div>
 
@@ -58,6 +57,47 @@
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            $("#submitComment").click(sendCommentWriteHandler);
+
+            function sendCommentWriteHandler() {
+                let commentMSG = $("#commentMSG").val();
+                let board = [[${boardDTO}]];
+                let username = [[${username}]];
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:8080/board/comment",
+                    data: {
+                        id: board.id,
+                        content: commentMSG
+                    },
+                    success: function(res) {
+                        $("#commentMSG").val(" ");
+                        addCommentMessage(commentMSG,username);
+                        console.log("요청 성공", res);
+                    },
+                    error: function(res) {
+                        console.log("요청 실패", res);
+                    }
+                });
+            }
+        })
+        function addCommentMessage(content,username) {
+            const commentScreen = document.getElementById("commentBox");
+            //추가할 DIV 부모 태그
+            const commentBox = document.createElement("div");
+            //앞으로 생각될 태그
+
+            commentBox.className = "comment";
+            commentBox.innerHTML = `
+                        <span> → <strong>${content}</strong></span>
+                        <span><small>${username}</small></span>
+               `;
+            commentScreen.insertBefore(commentBox, commentScreen.firstChild);
+        }
+    </script>
 </main>
+
 </body>
 </html>
